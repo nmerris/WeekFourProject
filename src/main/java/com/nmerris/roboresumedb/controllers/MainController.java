@@ -85,6 +85,7 @@ public class MainController {
         Person p = personRepo.findAll().iterator().next();
 //        System.out.println("################################################ inside /addecuation GET, person fn from db is: " + p.getNameFirst());
 
+        model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("newEdAchievement", new EducationAchievement());
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
@@ -100,12 +101,20 @@ public class MainController {
             return "addeducation";
         }
 
+        educationRepo.save(educationAchievement);
+
+        long numRecords = educationRepo.count();
+//        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% num records in educationRepo: " + numRecords);
+
+        // get the single person from the Person table
         Person p = personRepo.findAll().iterator().next();
 
+        model.addAttribute("currentNumRecords", numRecords);
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
-        educationRepo.save(educationAchievement);
+
+
         return "addeducationconfirmation";
     }
 

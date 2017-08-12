@@ -17,10 +17,12 @@ public class EducationAchievement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Size(min = 3, max = 64)
+    @Size(min = 2, max = 64)
     private String major;
-    @Size(min = 3, max = 64)
+    @Size(min = 2, max = 64)
     private String school;
+
+    // TODO set max year to current year
     @Min(1920)
     private long graduationYear;
 

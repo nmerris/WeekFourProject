@@ -9,18 +9,22 @@
 
 <h1>Educational Achievement successfully added</h1>
 <h2 th:text="${firstAndLastName}"></h2>
+<h3 th:text="'Number of Educational achievements entered: ' + ${currentNumRecords}"></h3>
 
 
-    <p th:text="${edAchievementJustAdded.school}">school just added placeholder</p><br/>
-    <p th:text="${edAchievementJustAdded.major}">major just added placeholder</p><br/>
-    <p th:text="${edAchievementJustAdded.graduationYear}">year just added placeholder</p><br/>
+    <p th:text="${'School: ' + edAchievementJustAdded.school}">school just added placeholder</p><br/>
+    <p th:text="${'Major: ' + edAchievementJustAdded.major}">major just added placeholder</p><br/>
+    <p th:text="${'Graduation Year: ' + edAchievementJustAdded.graduationYear}">year just added placeholder</p><br/>
 
 
     <br/>
     <a href="workexperience">Done with Education</a>
     <br/>
-    <a href="addeducation">Add more educational achievements</a>
+
+    <!-- hide the link to add more educational achievements if there are 10 or more already entered -->
+    <a th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add more educational achievements</a>
     <br/>
+
     <a href="index">Start Over</a>
 
 

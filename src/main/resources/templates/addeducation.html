@@ -7,7 +7,9 @@
 <body>
 
 <h1>Add Educational Achievement</h1>
-<h2 th:text="${firstAndLastName}"></h2>
+<h2 th:text="'Entering resume info for: ' + ${firstAndLastName}"></h2>
+<h3 th:text="'Number of Educational achievements entered: ' + ${currentNumRecords}"></h3>
+
 
 <form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">
 
