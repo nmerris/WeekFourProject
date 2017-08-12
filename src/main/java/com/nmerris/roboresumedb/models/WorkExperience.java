@@ -1,10 +1,9 @@
 package com.nmerris.roboresumedb.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class WorkExperience {
@@ -19,8 +18,9 @@ public class WorkExperience {
     @Size(min = 3, max = 64)
     private String company;
 
-    // TODO get the damn temporal annotation and error msg to work
-    private String dateStart;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    private Date dateStart;
 
     // date end is optional, assume it's todays date if nothing is entered
     private String dateEnd;
@@ -47,11 +47,11 @@ public class WorkExperience {
         this.company = company;
     }
 
-    public String getDateStart() {
+    public Date getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(String dateStart) {
+    public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
 

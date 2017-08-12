@@ -141,18 +141,19 @@ public class MainController {
                             BindingResult bindingResult, Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
 
+        // get the single person from the Person table
+        Person p = personRepo.findAll().iterator().next();
+
+        model.addAttribute("workExperienceJustAdded", workExperience);
+        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+
         if(bindingResult.hasErrors()) {
+            model.addAttribute("currentNumRecords", workExperienceRepo.count());
             return "addworkexperience";
         }
 
         workExperienceRepo.save(workExperience);
-
-        // get the single person from the Person table
-        Person p = personRepo.findAll().iterator().next();
-
         model.addAttribute("currentNumRecords", workExperienceRepo.count());
-        model.addAttribute("workExperienceJustAdded", workExperience);
-        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
         return "addworkexperienceconfirmation";
     }
