@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<h1>Educational Achievement successfully added</h1>
+<h2 th:text="${firstAndLastName}"></h2>
+
+
+    <p th:text="${edAchievementJustAdded.school}">school just added placeholder</p><br/>
+    <p th:text="${edAchievementJustAdded.major}">major just added placeholder</p><br/>
+    <p th:text="${edAchievementJustAdded.graduationYear}">year just added placeholder</p><br/>
+
+
+    <br/>
+    <a href="workexperience">Done with Education</a>
+    <br/>
+    <a href="addeducation">Add more educational achievements</a>
+    <br/>
+    <a href="index">Start Over</a>
+
+
+
+</body>
+</html>

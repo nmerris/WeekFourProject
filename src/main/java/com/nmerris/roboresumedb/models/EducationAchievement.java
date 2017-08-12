@@ -14,6 +14,7 @@ public class EducationAchievement {
 
     private String major;
     private String school;
+    private long graduationYear;
 
     public String getMajor() {
         return major;
@@ -29,5 +30,13 @@ public class EducationAchievement {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public long getGraduationYear() {
+        return graduationYear;
+    }
+
+    public void setGraduationYear(long graduationYear) {
+        this.graduationYear = graduationYear;
     }
 }

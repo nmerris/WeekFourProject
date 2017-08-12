@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Add Educational Achievement</h1>
+<h2 th:text="${firstAndLastName}"></h2>
+
+<form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">
+
+    School: <input type="text" th:field="*{school}"/>
+    <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Please enter a first name</span><br>-->
+
+    Major: <input type="text" th:field="*{major}"/>
+
+    Graduation Year: <input type="text" th:field="*{graduationYear}"/>
+    <!--<span th:if="${#fields.hasErrors('dishTitle')}" th:errors="*{dishTitle}">Please enter a dish title</span><br>-->
+
+
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset"/>
+    <br/>
+
+    <a href="workexperience">Done with Education</a>
+    <br/>
+    <a href="index">Start Over</a>
+
+
+</form>
+
+
+
+
+</body>
+</html>
