@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @Entity
 public class WorkExperience {
@@ -12,11 +13,22 @@ public class WorkExperience {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Size(min = 3, max = 64)
     private String jobTitle;
+
+    @Size(min = 3, max = 64)
     private String company;
+
+    // TODO get the damn temporal annotation and error msg to work
     private String dateStart;
+
+    // date end is optional, assume it's todays date if nothing is entered
     private String dateEnd;
+
+    @Size(min = 3, max = 64)
     private String dutyOne;
+
+    // second duty is optional
     private String dutyTwo;
 
     public String getJobTitle() {

@@ -2,6 +2,7 @@ package com.nmerris.roboresumedb.controllers;
 
 import com.nmerris.roboresumedb.models.EducationAchievement;
 import com.nmerris.roboresumedb.models.Person;
+import com.nmerris.roboresumedb.models.WorkExperience;
 import com.nmerris.roboresumedb.repositories.EducationRepo;
 import com.nmerris.roboresumedb.repositories.PersonRepo;
 import com.nmerris.roboresumedb.repositories.SkillsRepo;
@@ -97,27 +98,58 @@ public class MainController {
                             BindingResult bindingResult, Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation POST route ++++++++++++++++++ ");
 
+        // get the single person from the Person table
+        Person p = personRepo.findAll().iterator().next();
+
+        model.addAttribute("currentNumRecords", educationRepo.count());
+        model.addAttribute("edAchievementJustAdded", educationAchievement);
+        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+
         if(bindingResult.hasErrors()) {
             return "addeducation";
         }
 
         educationRepo.save(educationAchievement);
 
-        long numRecords = educationRepo.count();
-//        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% num records in educationRepo: " + numRecords);
+        return "addeducationconfirmation";
+    }
+
+
+
+    @GetMapping("/addworkexperience")
+    public String addWorkGet(Model model) {
+        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience GET route ++++++++++++++++++");
+
+        Person p = personRepo.findAll().iterator().next();
+//        System.out.println("################################################ inside /addecuation GET, person fn from db is: " + p.getNameFirst());
+
+        model.addAttribute("currentNumRecords", workExperienceRepo.count());
+        model.addAttribute("newWorkExperience", new WorkExperience());
+        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+
+        return "addworkexperience";
+    }
+
+    @PostMapping("/addworkexperience")
+    public String addWorkPost(@Valid @ModelAttribute("newWorkExperience") WorkExperience workExperience,
+                            BindingResult bindingResult, Model model) {
+        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
+
+        if(bindingResult.hasErrors()) {
+            return "addworkexperience";
+        }
+
+        workExperienceRepo.save(workExperience);
 
         // get the single person from the Person table
         Person p = personRepo.findAll().iterator().next();
 
-        model.addAttribute("currentNumRecords", numRecords);
-        model.addAttribute("edAchievementJustAdded", educationAchievement);
+        model.addAttribute("currentNumRecords", workExperienceRepo.count());
+        model.addAttribute("workExperienceJustAdded", workExperience);
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
-
-
-        return "addeducationconfirmation";
+        return "addworkexperienceconfirmation";
     }
-
 
 
 }

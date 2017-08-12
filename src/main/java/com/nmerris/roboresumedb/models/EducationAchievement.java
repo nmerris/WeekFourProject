@@ -22,7 +22,7 @@ public class EducationAchievement {
     @Size(min = 2, max = 64)
     private String school;
 
-    // TODO set max year to current year
+
     @Min(1920)
     private long graduationYear;
 
@@ -36,8 +36,7 @@ public class EducationAchievement {
 
     public String getSchool() {
         return school;
-    }
-
+}
     public void setSchool(String school) {
         this.school = school;
     }
