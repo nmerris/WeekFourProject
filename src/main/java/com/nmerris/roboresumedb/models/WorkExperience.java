@@ -1,6 +1,8 @@
 package com.nmerris.roboresumedb.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -18,12 +20,18 @@ public class WorkExperience {
     @Size(min = 3, max = 64)
     private String company;
 
+    // TemporalType.DATE requires a month, day, and year, but will handle many formats
+    // TODO make my own TemporalType annotation?  if only I had infinite time...
     @NotNull
+//    @Past // not working
     @Temporal(TemporalType.DATE)
     private Date dateStart;
 
     // date end is optional, assume it's todays date if nothing is entered
-    private String dateEnd;
+    // using @Temporal here give a validation error if input box is empty!
+    // TODO figure out why
+    @Temporal(TemporalType.DATE)
+    private Date dateEnd;
 
     @Size(min = 3, max = 64)
     private String dutyOne;
@@ -55,11 +63,11 @@ public class WorkExperience {
         this.dateStart = dateStart;
     }
 
-    public String getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(String dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 

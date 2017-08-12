@@ -149,6 +149,15 @@ public class MainController {
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", workExperienceRepo.count());
+
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ dateEnd: " + workExperience.getDateEnd());
+
+            // ignore the date end error if it's null, not sure why a null dateEnd input triggers a validation error here
+            if(workExperience.getDateEnd() != null) {
+                model.addAttribute("showDateEndError", true);
+                // else showDateEndError will default to false
+            }
+
             return "addworkexperience";
         }
 

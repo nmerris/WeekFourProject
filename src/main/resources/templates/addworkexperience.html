@@ -17,13 +17,13 @@
     <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Please enter a company</span><br/>
 
     Start Date: <input type="text" th:field="*{dateStart}"/><br/>
-    <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="Please enter a valid date">Please enter a valid start date</span><br/>
+    <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'">Please enter a valid start date</span><br/>
 
     End Date: <input type="text" th:field="*{dateEnd}"/><br/>
-    <span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}">Please enter a valid end date</span><br/>
+    <span th:if="${#fields.hasErrors('dateEnd') and showDateEndError}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
 
     Duty 1: <input type="text" th:field="*{dutyOne}"/><br/>
-    <span th:if="${#fields.hasErrors('dutyOne')}" th:errors="*{dutyOne}">Please enter at leas one duty</span><br/>
+    <span th:if="${#fields.hasErrors('dutyOne')}" th:errors="*{dutyOne}">Please enter at least one duty</span><br/>
 
     Duty 2: <input type="text" th:field="*{dutyTwo}"/><br/>
 
