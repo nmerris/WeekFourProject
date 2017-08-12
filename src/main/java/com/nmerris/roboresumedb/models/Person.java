@@ -1,5 +1,8 @@
 package com.nmerris.roboresumedb.models;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +18,11 @@ public class Person {
     private long id;
     
     // fields to save in the db
-    @NotNull
+    @NotEmpty
     private String nameFirst;
+    @NotEmpty
     private String nameLast;
+    @Email
     private String email;
     
     // data to store temporarily for this project

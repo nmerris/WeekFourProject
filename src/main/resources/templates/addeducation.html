@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -11,13 +11,14 @@
 
 <form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">
 
-    School: <input type="text" th:field="*{school}"/>
-    <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Please enter a first name</span><br>-->
+    School: <input type="text" th:field="*{school}"/><br/>
+    <span th:if="${#fields.hasErrors('school')}" th:errors="*{school}">Please enter an educational achievement</span><br/>
 
-    Major: <input type="text" th:field="*{major}"/>
+    Major: <input type="text" th:field="*{major}"/><br/>
+    <span th:if="${#fields.hasErrors('major')}" th:errors="*{major}">Please enter a major</span><br/>
 
-    Graduation Year: <input type="text" th:field="*{graduationYear}"/>
-    <!--<span th:if="${#fields.hasErrors('dishTitle')}" th:errors="*{dishTitle}">Please enter a dish title</span><br>-->
+    Graduation Year: <input type="text" th:field="*{graduationYear}"/><br/>
+    <span th:if="${#fields.hasErrors('graduationYear')}" th:errors="*{graduationYear}">Please enter a graduation year</span><br/>
 
 
     <input type="submit" value="Submit"/>

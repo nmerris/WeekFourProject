@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.Iterator;
 
 @Controller
@@ -57,13 +58,14 @@ public class MainController {
     }
 
     @PostMapping("/addperson")
-    public String addPersonPost(@ModelAttribute("newPerson") Person person, BindingResult bindingResult) {
+    public String addPersonPost(@Valid @ModelAttribute("newPerson") Person person, BindingResult bindingResult) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
 
 
         if(bindingResult.hasErrors()) {
             // return addperson after adding validation stuff
 
+            System.out.println("********************* BINDING RESULT ERROR IN /addperson POST ****************************");
             return "addperson";
         }
 
@@ -90,7 +92,7 @@ public class MainController {
     }
 
     @PostMapping("/addeducation")
-    public String addEdPost(@ModelAttribute("newEdAchievement") EducationAchievement educationAchievement,
+    public String addEdPost(@Valid @ModelAttribute("newEdAchievement") EducationAchievement educationAchievement,
                             BindingResult bindingResult, Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation POST route ++++++++++++++++++ ");
 

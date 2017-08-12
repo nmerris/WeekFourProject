@@ -10,13 +10,14 @@
 
     <form action="#" th:action="@{/addperson}" th:object="${newPerson}" method="post">
 
-        First Name: <input type="text" th:field="*{nameFirst}"/>
-        <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Please enter a first name</span><br>-->
+        First Name: <input type="text" th:field="*{nameFirst}"/><br/>
+        <span th:if="${#fields.hasErrors('nameFirst')}" th:errors="*{nameFirst}">Please enter a first name</span><br/>
 
-        Last Name: <input type="text" th:field="*{nameLast}"/>
+        Last Name: <input type="text" th:field="*{nameLast}"/><br/>
+        <span th:if="${#fields.hasErrors('nameLast')}" th:errors="*{nameLast}">Please enter a last name</span><br/>
 
-        Email: <input type="text" th:field="*{email}"/>
-        <!--<span th:if="${#fields.hasErrors('dishTitle')}" th:errors="*{dishTitle}">Please enter a dish title</span><br>-->
+        Email: <input type="text" th:field="*{email}"/><br/>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Please enter a valid email address</span><br/>
 
 
         <input type="submit" value="Submit"/>
