@@ -101,15 +101,21 @@ public class MainController {
         // get the single person from the Person table
         Person p = personRepo.findAll().iterator().next();
 
-        model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
         if(bindingResult.hasErrors()) {
+            // need to get the count even if an error, because we always show the count
+            // it is also needed to know if we should allow the user to exit the education section, since they
+            // must enter at least one educational achievement
+            model.addAttribute("currentNumRecords", educationRepo.count());
             return "addeducation";
         }
 
         educationRepo.save(educationAchievement);
+
+        // need to get the count AFTER successfully adding to db, so it is up to date
+        model.addAttribute("currentNumRecords", educationRepo.count());
 
         return "addeducationconfirmation";
     }
