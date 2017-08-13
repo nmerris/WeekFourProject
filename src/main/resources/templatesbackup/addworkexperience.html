@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Add a work experience</h1>
+<h2 th:text="'Entering resume info for: ' + ${firstAndLastName}"></h2>
+<h3 th:text="'Number of Educational achievements entered (0 - 10): ' + ${currentNumRecords}"></h3>
+
+<form action="#" th:action="@{/addworkexperience}" th:object="${newWorkExperience}" method="post">
+
+    Job Title: <input type="text" th:field="*{jobTitle}"/><br/>
+    <span th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}">Please enter a job title</span><br/>
+
+    Company: <input type="text" th:field="*{company}"/><br/>
+    <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Please enter a company</span><br/>
+
+    Start Date: <input type="text" th:placeholder="'Jul 4, 1976'" th:field="*{dateStart}"/><br/>
+    <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'">Please enter a valid start date</span><br/>
+
+    End Date (enter today if currently employed): <input type="text" th:placeholder="${todaysDate}" th:field="*{dateEnd}"/><br/>
+    <span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
+
+    Duty 1: <input type="text" th:field="*{dutyOne}"/><br/>
+    <span th:if="${#fields.hasErrors('dutyOne')}" th:errors="*{dutyOne}">Please enter at least one duty</span><br/>
+
+    Duty 2: <input type="text" th:field="*{dutyTwo}"/><br/>
+
+
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset"/>
+
+    <br/>
+    <a href="addskill">Done Adding Work Experiences</a><br/>
+    <a href="addeducation">Back to Educational Achievements</a><br/>
+    <a href="index.html">Start Over</a>
+
+
+</form>
+
+
+
+
+</body>
+</html>
