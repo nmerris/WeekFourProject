@@ -7,6 +7,8 @@
 <body>
 
 <h1>Add a work experience</h1>
+<h2 th:text="'Entering resume info for: ' + ${firstAndLastName}"></h2>
+<h3 th:text="'Number of Educational achievements entered (0 - 10): ' + ${currentNumRecords}"></h3>
 
 <form action="#" th:action="@{/addworkexperience}" th:object="${newWorkExperience}" method="post">
 
@@ -20,7 +22,7 @@
     <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'">Please enter a valid start date</span><br/>
 
     End Date: <input type="text" th:field="*{dateEnd}"/><br/>
-    <span th:if="${#fields.hasErrors('dateEnd') and showDateEndError}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
+    <span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
 
     Duty 1: <input type="text" th:field="*{dutyOne}"/><br/>
     <span th:if="${#fields.hasErrors('dutyOne')}" th:errors="*{dutyOne}">Please enter at least one duty</span><br/>

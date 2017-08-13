@@ -1,5 +1,7 @@
 package com.nmerris.roboresumedb.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -22,7 +24,7 @@ public class WorkExperience {
 
     // TemporalType.DATE requires a month, day, and year, but will handle many formats
     // TODO make my own TemporalType annotation?  if only I had infinite time...
-    @NotNull
+//    @NotNull
 //    @Past // not working
     @Temporal(TemporalType.DATE)
     private Date dateStart;
@@ -30,6 +32,7 @@ public class WorkExperience {
     // date end is optional, assume it's todays date if nothing is entered
     // using @Temporal here give a validation error if input box is empty!
     // TODO figure out why
+//    @NotNull
     @Temporal(TemporalType.DATE)
     private Date dateEnd;
 

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
 public class Person {
@@ -24,11 +25,22 @@ public class Person {
     private String nameLast;
     @Email
     private String email;
+
+    // the date the resume was created, automatically generated, not a user input
+    private Date resumeCreationDate;
     
     // data to store temporarily for this project
     private ArrayList<EducationAchievement> educationAchievements = new ArrayList<EducationAchievement>();
     private ArrayList<WorkExperience> workExperiences = new ArrayList<WorkExperience>();
     private ArrayList<Skill> skills = new ArrayList<Skill>();
+
+    public Date getResumeCreationDate() {
+        return resumeCreationDate;
+    }
+
+    public void setResumeCreationDate(Date resumeCreationDate) {
+        this.resumeCreationDate = resumeCreationDate;
+    }
 
     public String getNameFirst() {
         return nameFirst;

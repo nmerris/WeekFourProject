@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 @Controller
@@ -69,6 +71,9 @@ public class MainController {
             System.out.println("********************* BINDING RESULT ERROR IN /addperson POST ****************************");
             return "addperson";
         }
+
+        // set the resume creation date to right now
+        person.setResumeCreationDate(new Date());
 
         // person should have first and last names, and email at this point
         // the collections in Person are null at this point, which shows up as a BLOB in the db!  ...blob is you uncle
@@ -133,6 +138,8 @@ public class MainController {
         model.addAttribute("newWorkExperience", new WorkExperience());
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
+
+
         return "addworkexperience";
     }
 
@@ -147,16 +154,13 @@ public class MainController {
         model.addAttribute("workExperienceJustAdded", workExperience);
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
+
+        // TODO chop off the timestamp from the date, put it back in the model so it looks nice when page is redisplayed with errors
+        // TODO check if end date is later than start date
+
+
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", workExperienceRepo.count());
-
-            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ dateEnd: " + workExperience.getDateEnd());
-
-            // ignore the date end error if it's null, not sure why a null dateEnd input triggers a validation error here
-            if(workExperience.getDateEnd() != null) {
-                model.addAttribute("showDateEndError", true);
-                // else showDateEndError will default to false
-            }
 
             return "addworkexperience";
         }
