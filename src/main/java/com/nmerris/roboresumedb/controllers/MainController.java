@@ -174,18 +174,6 @@ public class MainController {
     public String addSkillGet(Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill GET route ++++++++++++++++++");
 
-
-//        try {
-//            // try to get the single Person from the db
-//            Person p = personRepo.findAll().iterator().next();
-//            // if there was a Person, add their full name to the model
-//            model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
-//        } catch (Exception e) {
-//            // must not have found a Person in the db, so use a placeholder name
-//            // this really convenient for testing, but it also makes the app less likely to crash
-//            model.addAttribute("firstAndLastName", "Jane Java Doe");
-//        }
-
         addPersonNameToModel(model);
         model.addAttribute("currentNumRecords", skillRepo.count());
         model.addAttribute("newSkill", new Skill());
@@ -198,11 +186,8 @@ public class MainController {
                               BindingResult bindingResult, Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill POST route ++++++++++++++++++ ");
 
-        // get the single skill from the Person table
-        Person p = personRepo.findAll().iterator().next();
-
+        addPersonNameToModel(model);
         model.addAttribute("skillJustAdded", skill);
-        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", skillRepo.count());

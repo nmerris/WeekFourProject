@@ -16,7 +16,7 @@ public class Skill {
 
     @Size(min = 3, max = 64)
     private String skill;
-    @Size(min = 3, max = 64)
+    @NotNull
     private String rating;
 
     public String getSkill() {
