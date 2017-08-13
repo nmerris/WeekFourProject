@@ -1,5 +1,6 @@
 package com.nmerris.roboresumedb.controllers;
 
+import com.nmerris.roboresumedb.Utilities;
 import com.nmerris.roboresumedb.models.EducationAchievement;
 import com.nmerris.roboresumedb.models.Person;
 import com.nmerris.roboresumedb.models.WorkExperience;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -134,11 +136,12 @@ public class MainController {
         Person p = personRepo.findAll().iterator().next();
 //        System.out.println("################################################ inside /addecuation GET, person fn from db is: " + p.getNameFirst());
 
+        // it would be nice to show todays date as placeholder text for end date
+        model.addAttribute("todaysDate", Utilities.getTodaysDateString());
+
         model.addAttribute("currentNumRecords", workExperienceRepo.count());
         model.addAttribute("newWorkExperience", new WorkExperience());
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
-
-
 
         return "addworkexperience";
     }
@@ -154,10 +157,8 @@ public class MainController {
         model.addAttribute("workExperienceJustAdded", workExperience);
         model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
-
         // TODO chop off the timestamp from the date, put it back in the model so it looks nice when page is redisplayed with errors
         // TODO check if end date is later than start date
-
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", workExperienceRepo.count());

@@ -18,10 +18,10 @@
     Company: <input type="text" th:field="*{company}"/><br/>
     <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Please enter a company</span><br/>
 
-    Start Date: <input type="text" th:field="*{dateStart}"/><br/>
+    Start Date: <input type="text" th:placeholder="'Jul 4, 1976'" th:field="*{dateStart}"/><br/>
     <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'">Please enter a valid start date</span><br/>
 
-    End Date: <input type="text" th:field="*{dateEnd}"/><br/>
+    End Date (enter today if currently employed): <input type="text" th:placeholder="${todaysDate}" th:field="*{dateEnd}"/><br/>
     <span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
 
     Duty 1: <input type="text" th:field="*{dutyOne}"/><br/>
