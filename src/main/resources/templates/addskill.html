@@ -15,9 +15,13 @@
     Skill: <input type="text" th:field="*{skill}"/><br/>
     <span th:if="${#fields.hasErrors('skill')}" th:errors="*{skill}">Please enter a skill</span><br/>
 
-    <input type="radio" name="rating" value="Expert" th:field="*{rating}"/>Expert<br/>
-    <input type="radio" name="rating" value="Proficient" th:field="*{rating}"/>Proficient<br/>
-    <input type="radio" name="rating" value="Familiar" th:field="*{rating}"/>Familiar<br/>
+    <!-- label allows user to click the text OR the radio button to select, for convenience K-->
+    <label for="expertId">Expert</label>
+    <input type="radio" name="rating" id="expertId" value="Expert" th:field="*{rating}"/><br/>
+    <label for="proficientId">Proficient</label>
+    <input type="radio" name="rating" id="proficientId" value="Proficient" th:field="*{rating}"/><br/>
+    <label for="familiarId">Familiar</label>
+    <input type="radio" name="rating" id="familiarId" value="Familiar" th:field="*{rating}"/><br/>
 
 
     <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Please enter a rating</span><br/>

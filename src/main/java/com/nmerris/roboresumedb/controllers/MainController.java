@@ -52,7 +52,6 @@ public class MainController {
     public String addPersonGet(Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson GET route ++++++++++++++++++");
 
-
         model.addAttribute("newPerson", new Person());
 
         return "addperson";
@@ -62,11 +61,7 @@ public class MainController {
     public String addPersonPost(@Valid @ModelAttribute("newPerson") Person person, BindingResult bindingResult) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
 
-
         if(bindingResult.hasErrors()) {
-            // return addperson after adding validation stuff
-
-            System.out.println("********************* BINDING RESULT ERROR IN /addperson POST ****************************");
             return "addperson";
         }
 
@@ -86,12 +81,9 @@ public class MainController {
     public String addEdGet(Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
 
-        Person p = personRepo.findAll().iterator().next();
-//        System.out.println("################################################ inside /addecuation GET, person fn from db is: " + p.getNameFirst());
-
         model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("newEdAchievement", new EducationAchievement());
-        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+        addPersonNameToModel(model);
 
         return "addeducation";
     }
@@ -101,11 +93,8 @@ public class MainController {
                             BindingResult bindingResult, Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation POST route ++++++++++++++++++ ");
 
-        // get the single person from the Person table
-        Person p = personRepo.findAll().iterator().next();
-
         model.addAttribute("edAchievementJustAdded", educationAchievement);
-        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+        addPersonNameToModel(model);
 
         if(bindingResult.hasErrors()) {
             // need to get the count even if an error, because we always show the count
@@ -129,15 +118,12 @@ public class MainController {
     public String addWorkGet(Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience GET route ++++++++++++++++++");
 
-        Person p = personRepo.findAll().iterator().next();
-//        System.out.println("################################################ inside /addecuation GET, person fn from db is: " + p.getNameFirst());
-
         // it would be nice to show todays date as placeholder text for end date
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
 
+        addPersonNameToModel(model);
         model.addAttribute("currentNumRecords", workExperienceRepo.count());
         model.addAttribute("newWorkExperience", new WorkExperience());
-        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
         return "addworkexperience";
     }
@@ -147,11 +133,9 @@ public class MainController {
                             BindingResult bindingResult, Model model) {
         System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
 
-        // get the single person from the Person table
-        Person p = personRepo.findAll().iterator().next();
-
+        addPersonNameToModel(model);
+        model.addAttribute("todaysDate", Utilities.getTodaysDateString());
         model.addAttribute("workExperienceJustAdded", workExperience);
-        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
 
         // TODO chop off the timestamp from the date, put it back in the model so it looks nice when page is redisplayed with errors
         // TODO check if end date is later than start date
@@ -203,7 +187,7 @@ public class MainController {
 
 
 
-    public void addPersonNameToModel(Model model) {
+    private void addPersonNameToModel(Model model) {
         try {
             // try to get the single Person from the db
             Person p = personRepo.findAll().iterator().next();
@@ -211,7 +195,7 @@ public class MainController {
             model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
         } catch (Exception e) {
             // must not have found a Person in the db, so use a placeholder name
-            // this really convenient for testing, but it also makes the app less likely to crash
+            // this is really convenient for testing, but it also makes the app less likely to crash
             model.addAttribute("firstAndLastName", "Jane Java Doe");
         }
     }
