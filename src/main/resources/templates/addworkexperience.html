@@ -1,48 +1,152 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
-<body>
 
-<h1>Add a work experience</h1>
-<h2 th:text="'Entering resume info for: ' + ${firstAndLastName}"></h2>
-<h3 th:text="'Number of Educational achievements entered (0 - 10): ' + ${currentNumRecords}"></h3>
+  <head>
 
-<form action="#" th:action="@{/addworkexperience}" th:object="${newWorkExperience}" method="post">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    Job Title: <input type="text" th:field="*{jobTitle}"/><br/>
-    <span th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}">Please enter a job title</span><br/>
+    <title>Robo Resume</title>
 
-    Company: <input type="text" th:field="*{company}"/><br/>
-    <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Please enter a company</span><br/>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    Start Date: <input type="text" th:placeholder="'Jul 4, 1976'" th:field="*{dateStart}"/><br/>
-    <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'">Please enter a valid start date</span><br/>
+    <!-- Custom fonts for this template -->
+    <!-- **** SPRING BOOT EXPECTS ALL STATIC RESOURCES TO BE IN resources/static **** -->
+    <!-- So even though IntelliJ does not think the refs are good, they work when running on the server -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-    End Date (enter today if currently employed): <input type="text" th:placeholder="${todaysDate}" th:field="*{dateEnd}"/><br/>
-    <span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
 
-    Duty 1: <input type="text" th:field="*{dutyOne}"/><br/>
-    <span th:if="${#fields.hasErrors('dutyOne')}" th:errors="*{dutyOne}">Please enter at least one duty</span><br/>
+  </head>
 
-    Duty 2: <input type="text" th:field="*{dutyTwo}"/><br/>
-
-
-    <input type="submit" value="Submit"/>
-    <input type="reset" value="Reset"/>
-
-    <br/>
-    <a href="addskill">Done Adding Work Experiences</a><br/>
-    <a href="addeducation">Back to Educational Achievements</a><br/>
-    <a href="index.html">Start Over</a>
+  <body id="page-top">
 
 
-</form>
+    <!-- Header -->
+    <!--<header class="masthead">-->
+      <!--<div class="container">-->
+        <!--<div class="intro-text">-->
+          <!--<div class="intro-lead-in">Welcome To Our Studio!</div>-->
+          <!--<div class="intro-heading">It's Nice To Meet You</div>-->
+          <!--<a href="#services" class="btn btn-xl">Tell Me More</a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</header>-->
+
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
+            <h5 class="section-heading">Please enter 1 - 10 educational achievements</h5>
+            <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' so far'"></h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+
+            <form action="#" th:action="@{/addworkexperience}" th:object="${newWorkExperience}" method="post">
+            <!--<form id="contactForm" name="sentMessage" novalidate>-->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input class="form-control" type="text" th:field="*{jobTitle}" placeholder="Job Title">
+                    <!--<span th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}">Please enter a job title</span><br/>-->
+                    <p class="help-block text-danger" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}">Fart!!</p>
+
+                    <h5 class="section-heading">Please enter 1 - 10 educational achievements</h5>
+
+
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" th:field="*{company}" placeholder="Company">
+                    <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Please enter a company</span><br/>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" th:field="*{dateStart}" placeholder="Start Date">
+                    <span th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'">Please enter a valid start date</span><br/>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" th:field="*{dateEnd}" placeholder="End Date - today if still employed">
+                    <span th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'">Please enter a valid end date</span><br/>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" th:field="*{dutyOne}" placeholder="Duty One">
+                    <span th:if="${#fields.hasErrors('dutyOne')}" th:errors="*{dutyOne}">Please enter at least one duty</span><br/>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" type="text" th:field="*{dutyTwo}" placeholder="Duty Two">
+                    <p class="help-block text-danger"></p>
+                  </div>
 
 
 
+                  <!--<div class="form-group">-->
+                    <!--<input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required data-validation-required-message="Please enter your phone number.">-->
+                    <!--<p class="help-block text-danger"></p>-->
+                  <!--</div>-->
 
-</body>
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                  <!--<div class="form-group">-->
+                    <!--<textarea class="form-control" id="message" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>-->
+                    <!--<p class="help-block text-danger"></p>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+                <div class="clearfix"></div>
+                <div class="col-lg-12 text-center">
+                  <div id="success"></div>
+                  <input class="btn btn-xl" type="submit" value="Submit"/>
+                </div>
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="copyright">Copyright &copy; Nathan Merris 2017</span>
+          </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+  </body>
+
 </html>

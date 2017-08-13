@@ -194,6 +194,7 @@ public class MainController {
     public String finalResumeGet(Model model) {
 
         // get the one and only person from the db
+        // it is not possible to get here unless a Person exists, and the other resume data has been entered
         Person p = personRepo.findAll().iterator().next();
 
         // populate the empty ArrayLists in our single Person from data in other tables
