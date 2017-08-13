@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 @Controller
 public class MainController {
@@ -39,9 +41,10 @@ public class MainController {
         // need this so that the tables resets every time we go back to index
         // this is necessary so that the data is correct if the user chooses to 'start over'
         personRepo.deleteAll();
-        educationRepo.deleteAll();
-        skillRepo.deleteAll();
-        workExperienceRepo.deleteAll();
+        // below commented out for testing
+//        educationRepo.deleteAll();
+//        skillRepo.deleteAll();
+//        workExperienceRepo.deleteAll();
 
         return "index";
     }
@@ -187,6 +190,44 @@ public class MainController {
 
 
 
+    @GetMapping("/finalresume")
+    public String finalResumeGet(Model model) {
+
+        // get the one and only person from the db
+        Person p = personRepo.findAll().iterator().next();
+
+        // populate the empty ArrayLists in our single Person from data in other tables
+        composePerson(p);
+
+
+
+        return "finalresume";
+    }
+
+
+
+    private void composePerson(Person p) {
+        // get all the records from the db
+        ArrayList<EducationAchievement> edsArrayList = new ArrayList<>();
+        for(EducationAchievement item : educationRepo.findAll()) {
+            edsArrayList.add(item);
+        }
+        // add it to our Person
+        p.setEducationAchievements(edsArrayList);
+
+        ArrayList<WorkExperience> weArrayList = new ArrayList<>();
+        for(WorkExperience item : workExperienceRepo.findAll()) {
+            weArrayList.add(item);
+        }
+        p.setWorkExperiences(weArrayList);
+
+        ArrayList<Skill> skillsArrayList = new ArrayList<>();
+        for(Skill item : skillRepo.findAll()) {
+            skillsArrayList.add(item);
+        }
+        p.setSkills(skillsArrayList);
+    }
+
     private void addPersonNameToModel(Model model) {
         try {
             // try to get the single Person from the db
@@ -196,7 +237,7 @@ public class MainController {
         } catch (Exception e) {
             // must not have found a Person in the db, so use a placeholder name
             // this is really convenient for testing, but it also makes the app less likely to crash
-            model.addAttribute("firstAndLastName", "Jane Java Doe");
+            model.addAttribute("firstAndLastName", "Please enter a person");
         }
     }
 
