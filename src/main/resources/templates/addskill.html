@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Add a skill</h1>
+<h2 th:text="'Entering resume info for: ' + ${firstAndLastName}"></h2>
+<h3 th:text="'Number of Skills entered (1 - 20): ' + ${currentNumRecords}"></h3>
+
+<form action="#" th:action="@{/addskill}" th:object="${newSkill}" method="post">
+
+    Skill: <input type="text" th:field="*{skill}"/><br/>
+    <span th:if="${#fields.hasErrors('skill')}" th:errors="*{skill}">Please enter a skill</span><br/>
+
+    <input type="radio" name="rating" value="Expert" th:field="*{rating}"/>Expert<br/>
+    <input type="radio" name="rating" value="Proficient" th:field="*{rating}"/>Proficient<br/>
+    <input type="radio" name="rating" value="Familiar" th:field="*{rating}"/>Familiar<br/>
+
+
+    <!--<span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Please enter a rating</span><br/>-->
+
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset"/>
+
+    <br/>
+
+    <!-- only allow user to continue if at least one record has been entered -->
+    <a th:if="${currentNumRecords} &gt; 0" th:href="@{/finalresume}">Done entering resume info, show me the final resume!</a>
+    <a href="addworkexperience">Back to Work Experiences</a><br/>
+    <a href="index.html">Start Over</a>
+
+
+</form>
+
+
+
+
+</body>
+</html>

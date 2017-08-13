@@ -3,10 +3,11 @@ package com.nmerris.roboresumedb.controllers;
 import com.nmerris.roboresumedb.Utilities;
 import com.nmerris.roboresumedb.models.EducationAchievement;
 import com.nmerris.roboresumedb.models.Person;
+import com.nmerris.roboresumedb.models.Skill;
 import com.nmerris.roboresumedb.models.WorkExperience;
 import com.nmerris.roboresumedb.repositories.EducationRepo;
 import com.nmerris.roboresumedb.repositories.PersonRepo;
-import com.nmerris.roboresumedb.repositories.SkillsRepo;
+import com.nmerris.roboresumedb.repositories.SkillRepo;
 import com.nmerris.roboresumedb.repositories.WorkExperienceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 
 @Controller
 public class MainController {
@@ -32,7 +28,7 @@ public class MainController {
     @Autowired
     EducationRepo educationRepo;
     @Autowired
-    SkillsRepo skillsRepo;
+    SkillRepo skillRepo;
     @Autowired
     WorkExperienceRepo workExperienceRepo;
 
@@ -44,7 +40,7 @@ public class MainController {
         // this is necessary so that the data is correct if the user chooses to 'start over'
         personRepo.deleteAll();
         educationRepo.deleteAll();
-        skillsRepo.deleteAll();
+        skillRepo.deleteAll();
         workExperienceRepo.deleteAll();
 
         return "index";
@@ -171,6 +167,70 @@ public class MainController {
 
         return "addworkexperienceconfirmation";
     }
+    
+
+
+    @GetMapping("/addskill")
+    public String addSkillGet(Model model) {
+        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill GET route ++++++++++++++++++");
+
+
+//        try {
+//            // try to get the single Person from the db
+//            Person p = personRepo.findAll().iterator().next();
+//            // if there was a Person, add their full name to the model
+//            model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+//        } catch (Exception e) {
+//            // must not have found a Person in the db, so use a placeholder name
+//            // this really convenient for testing, but it also makes the app less likely to crash
+//            model.addAttribute("firstAndLastName", "Jane Java Doe");
+//        }
+
+        addPersonNameToModel(model);
+        model.addAttribute("currentNumRecords", skillRepo.count());
+        model.addAttribute("newSkill", new Skill());
+
+        return "addskill";
+    }
+
+    @PostMapping("/addskill")
+    public String addSkillPost(@Valid @ModelAttribute("newSkill") Skill skill,
+                              BindingResult bindingResult, Model model) {
+        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill POST route ++++++++++++++++++ ");
+
+        // get the single skill from the Person table
+        Person p = personRepo.findAll().iterator().next();
+
+        model.addAttribute("skillJustAdded", skill);
+        model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("currentNumRecords", skillRepo.count());
+
+            return "addskill";
+        }
+
+        skillRepo.save(skill);
+        model.addAttribute("currentNumRecords", skillRepo.count());
+
+        return "addskillconfirmation";
+    }
+
+
+
+    public void addPersonNameToModel(Model model) {
+        try {
+            // try to get the single Person from the db
+            Person p = personRepo.findAll().iterator().next();
+            // if there was a Person, add their full name to the model
+            model.addAttribute("firstAndLastName", p.getNameFirst() + " " + p.getNameLast());
+        } catch (Exception e) {
+            // must not have found a Person in the db, so use a placeholder name
+            // this really convenient for testing, but it also makes the app less likely to crash
+            model.addAttribute("firstAndLastName", "Jane Java Doe");
+        }
+    }
+
 
 
 }
