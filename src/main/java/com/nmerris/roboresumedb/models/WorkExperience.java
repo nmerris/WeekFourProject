@@ -22,17 +22,9 @@ public class WorkExperience {
     @Size(min = 3, max = 64)
     private String company;
 
-    // TemporalType.DATE requires a month, day, and year, but will handle many formats
-    // TODO make my own TemporalType annotation?  if only I had infinite time...
-//    @NotNull
-//    @Past // not working
     @Temporal(TemporalType.DATE)
     private Date dateStart;
 
-    // date end is optional, assume it's todays date if nothing is entered
-    // using @Temporal here give a validation error if input box is empty!
-    // TODO figure out why
-//    @NotNull
     @Temporal(TemporalType.DATE)
     private Date dateEnd;
 

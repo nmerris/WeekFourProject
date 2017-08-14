@@ -42,10 +42,10 @@ public class MainController {
         // this is necessary so that the data is correct if the user chooses to 'start over'
 
         // below comment out for testing
-        personRepo.deleteAll();
-        educationRepo.deleteAll();
-        skillRepo.deleteAll();
-        workExperienceRepo.deleteAll();
+//        personRepo.deleteAll();
+//        educationRepo.deleteAll();
+//        skillRepo.deleteAll();
+//        workExperienceRepo.deleteAll();
 
         return "index";
     }
@@ -138,6 +138,8 @@ public class MainController {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
 
         addPersonNameToModel(model);
+
+        // add a placeholder for end date that is todays date, because why not?
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
         model.addAttribute("workExperienceJustAdded", workExperience);
 
@@ -195,15 +197,13 @@ public class MainController {
     public String finalResumeGet(Model model) {
 
         // get the one and only person from the db
-        // it is not possible to get here unless a Person exists, and the other resume data has been etn
+        // it is not possible to get here unless a Person exists, and the other resume data has been entered
         Person p = personRepo.findAll().iterator().next();
 
         // populate the empty ArrayLists in our single Person from data in other tables
         composePerson(p);
 
-
         model.addAttribute("person", p);
-
 
         return "finalresume";
     }
