@@ -1,32 +1,89 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Create your resume with Robo Resume!">
+    <meta name="author" content="Nathan Merris">
+
+    <title>Robo Resume</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <!-- **** SPRING BOOT EXPECTS ALL STATIC RESOURCES TO BE IN resources/static **** -->
+    <!-- So even though IntelliJ does not think the refs are good, they work when running on the server -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/customstyles.css" rel="stylesheet">
+
 </head>
-<body>
+
+<body id="page-top">
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
+                <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' skills so far'"></h6><br>
+
+                <p class="section-heading" th:text="${'Skill just entered: ' + skillJustAdded.skill}"></p>
+                <p class="section-heading" th:text="${'Rating just entered: ' + skillJustAdded.rating}"></p>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <a class="btn btn-xl" href="finalresume">Show final resume!</a>
+
+                <a class="btn btn-xl" th:if="${currentNumRecords} &lt; 20" th:href="@{/addskill}">Add another skill</a>
+
+                <a class="btn btn-xl" href="index">Start Over</a>
 
 
-<h1>Skill successfully added</h1>
-<h2 th:text="${firstAndLastName}"></h2>
-<h3 th:text="'Number of skills entered (1 - 20): ' + ${currentNumRecords}"></h3>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; Nathan Merris 2017</span>
+            </div>
+        </div>
+    </div>
+</footer>
 
-<p th:text="${'Skill: ' + skillJustAdded.skill}"></p><br/>
-<p th:text="${'Rating: ' + skillJustAdded.rating}"></p><br/>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<br/>
-<a href="finalresume">Done entering resume info, show me the final resume!</a>
-<br/>
+<!-- Contact form JavaScript -->
+<!--<script src="js/jqBootstrapValidation.js"></script>-->
+<!--<script src="js/contact_me.js"></script>-->
 
-<!-- hide the link to add more educational achievements if there are 10 or more already entered -->
-<a th:if="${currentNumRecords} &lt; 20" th:href="@{/addskill}">Add another skill</a>
-<br/>
-
-<a href="index">Start Over</a>
-
-
+<!-- Custom scripts for this template -->
+<script src="js/agency.min.js"></script>
 
 </body>
+
 </html>
