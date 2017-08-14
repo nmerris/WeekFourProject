@@ -40,7 +40,7 @@ public class MainController {
     public String indexPageGet() {
         // need this so that the tables resets every time we go back to index
         // this is necessary so that the data is correct if the user chooses to 'start over'
-        personRepo.deleteAll();
+//        personRepo.deleteAll();
         // below commented out for testing
 //        educationRepo.deleteAll();
 //        skillRepo.deleteAll();
@@ -200,6 +200,8 @@ public class MainController {
         // populate the empty ArrayLists in our single Person from data in other tables
         composePerson(p);
 
+
+        model.addAttribute("person", p);
 
 
         return "finalresume";
