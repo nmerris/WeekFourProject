@@ -54,7 +54,7 @@ public class MainController {
 
     @GetMapping("/addperson")
     public String addPersonGet(Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson GET route ++++++++++++++++++");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson GET route ++++++++++++++++++");
 
         model.addAttribute("newPerson", new Person());
 
@@ -63,7 +63,7 @@ public class MainController {
 
     @PostMapping("/addperson")
     public String addPersonPost(@Valid @ModelAttribute("newPerson") Person person, BindingResult bindingResult) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
 
         if(bindingResult.hasErrors()) {
             return "addperson";
@@ -83,7 +83,7 @@ public class MainController {
 
     @GetMapping("/addeducation")
     public String addEdGet(Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
 
         model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("newEdAchievement", new EducationAchievement());
@@ -95,7 +95,7 @@ public class MainController {
     @PostMapping("/addeducation")
     public String addEdPost(@Valid @ModelAttribute("newEdAchievement") EducationAchievement educationAchievement,
                             BindingResult bindingResult, Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation POST route ++++++++++++++++++ ");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation POST route ++++++++++++++++++ ");
 
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         addPersonNameToModel(model);
@@ -120,7 +120,7 @@ public class MainController {
 
     @GetMapping("/addworkexperience")
     public String addWorkGet(Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience GET route ++++++++++++++++++");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience GET route ++++++++++++++++++");
 
         // it would be nice to show todays date as placeholder text for end date
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
@@ -135,7 +135,7 @@ public class MainController {
     @PostMapping("/addworkexperience")
     public String addWorkPost(@Valid @ModelAttribute("newWorkExperience") WorkExperience workExperience,
                             BindingResult bindingResult, Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
 
         addPersonNameToModel(model);
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
@@ -160,7 +160,7 @@ public class MainController {
 
     @GetMapping("/addskill")
     public String addSkillGet(Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill GET route ++++++++++++++++++");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill GET route ++++++++++++++++++");
 
         addPersonNameToModel(model);
         model.addAttribute("currentNumRecords", skillRepo.count());
@@ -172,7 +172,7 @@ public class MainController {
     @PostMapping("/addskill")
     public String addSkillPost(@Valid @ModelAttribute("newSkill") Skill skill,
                               BindingResult bindingResult, Model model) {
-        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill POST route ++++++++++++++++++ ");
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addskill POST route ++++++++++++++++++ ");
 
         addPersonNameToModel(model);
         model.addAttribute("skillJustAdded", skill);
