@@ -54,7 +54,8 @@
                             <p class="final-resume-p" th:text="${item.jobTitle}"></p>
                             <p class="final-resume-p" th:text="${item.company} +', ' + ${item.dateStart} + ' to ' + ${item.dateEnd}"></p>
                             <p class="final-resume-p" th:text="'Duty 1: ' + ${item.dutyOne}"></p>
-                            <p class="final-resume-p" th:text="'Duty 2: ' + ${item.dutyTwo}"></p>
+                            <p class="final-resume-p" th:if="${!#strings.isEmpty(item.dutyTwo)}" th:text="'Duty 2: ' + ${item.dutyTwo}"></p>
+
                             <br/>
                         </th:block>
                         <br/>
