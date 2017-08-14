@@ -1,33 +1,131 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Create your resume with Robo Resume!">
+    <meta name="author" content="Nathan Merris">
+
+    <title>Robo Resume</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <!-- **** SPRING BOOT EXPECTS ALL STATIC RESOURCES TO BE IN resources/static **** -->
+    <!-- So even though IntelliJ does not think the refs are good, they work when running on the server -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+
 </head>
-<body>
 
+<body id="page-top">
 
-<h1>Educational Achievement successfully added</h1>
-<h2 th:text="${firstAndLastName}"></h2>
-<h3 th:text="'Number of Educational achievements entered (max 10): ' + ${currentNumRecords}"></h3>
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
+                <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' educational achievements'"></h6>
 
+                <p th:text="${'School entered: ' + edAchievementJustAdded.school}"></p><br/>
+                <p th:text="${'Major entered: ' + edAchievementJustAdded.major}"></p><br/>
+                <p th:text="${'Graduation Year entered: ' + edAchievementJustAdded.graduationYear}"></p><br/>
 
-    <p th:text="${'School: ' + edAchievementJustAdded.school}">school just added placeholder</p><br/>
-    <p th:text="${'Major: ' + edAchievementJustAdded.major}">major just added placeholder</p><br/>
-    <p th:text="${'Graduation Year: ' + edAchievementJustAdded.graduationYear}">year just added placeholder</p><br/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
 
+                <!-- you can only get to the add education confirmation page if you have successfully added one record, so always show link -->
+                <a href="addworkexperience" class="btn btn-xl">Done with Education</a>
 
-    <br/>
-    <a href="addworkexperience">Done with Education</a>
-    <br/>
+                <!-- hide the link to add more educational achievements if there are 10 or more already entered -->
+                <a class="btn btn-xl" th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add More Educational Achievements</a>
 
-    <!-- hide the link to add more educational achievements if there are 10 or more already entered -->
-    <a th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add more educational achievements</a>
-    <br/>
+                <a class="btn btn-xl" href="index">Start Over</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <a href="index">Start Over</a>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; Nathan Merris 2017</span>
+            </div>
+        </div>
+    </div>
+</footer>
 
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/popper/popper.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
+<!-- Plugin JavaScript -->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Contact form JavaScript -->
+<!--<script src="js/jqBootstrapValidation.js"></script>-->
+<!--<script src="js/contact_me.js"></script>-->
+
+<!-- Custom scripts for this template -->
+<script src="js/agency.min.js"></script>
 
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--<h1>Educational Achievement successfully added</h1>-->
+<!--<h2 th:text="${firstAndLastName}"></h2>-->
+<!--<h3 th:text="'Number of Educational achievements entered (max 10): ' + ${currentNumRecords}"></h3>-->
+
+
+    <!--<p th:text="${'School: ' + edAchievementJustAdded.school}">school just added placeholder</p><br/>-->
+    <!--<p th:text="${'Major: ' + edAchievementJustAdded.major}">major just added placeholder</p><br/>-->
+    <!--<p th:text="${'Graduation Year: ' + edAchievementJustAdded.graduationYear}">year just added placeholder</p><br/>-->
+
+
+    <!--<br/>-->
+    <!--<a href="addworkexperience">Done with Education</a>-->
+    <!--<br/>-->
+
+    <!--&lt;!&ndash; hide the link to add more educational achievements if there are 10 or more already entered &ndash;&gt;-->
+    <!--<a th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add more educational achievements</a>-->
+    <!--<br/>-->
+
+    <!--<a href="index">Start Over</a>-->
+
+
+
+<!--</body>-->
+<!--</html>-->

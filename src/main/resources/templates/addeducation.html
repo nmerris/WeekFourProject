@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Add Educational Achievement</h1>
+<h2 th:text="'Entering resume info for: ' + ${firstAndLastName}"></h2>
+<h3 th:text="'Number of Educational achievements entered (1 - 10): ' + ${currentNumRecords}"></h3>
+
+
+<form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">
+
+    School: <input type="text" th:field="*{school}"/><br/>
+    <span th:if="${#fields.hasErrors('school')}" th:errors="*{school}">Please enter an educational achievement</span><br/>
+
+    Major: <input type="text" th:field="*{major}"/><br/>
+    <span th:if="${#fields.hasErrors('major')}" th:errors="*{major}">Please enter a major</span><br/>
+
+    Graduation Year: <input type="text" th:field="*{graduationYear}"/><br/>
+    <span th:if="${#fields.hasErrors('graduationYear')}" th:errors="*{graduationYear}">Please enter a graduation year</span><br/>
+
+
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset"/>
+    <br/>
+
+    <!-- only allow user to continue if at least one record has been entered -->
+    <a th:if="${currentNumRecords} &gt; 0" th:href="@{/addworkexperience}">Done with Education</a>
+
+    <br/>
+    <a href="index">Start Over</a>
+
+
+</form>
+
+
+
+
+</body>
+</html>
