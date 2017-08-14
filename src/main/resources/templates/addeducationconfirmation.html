@@ -49,12 +49,12 @@
             <div class="col-lg-12">
 
                 <!-- you can only get to the add education confirmation page if you have successfully added one record, so always show link -->
-                <a href="addworkexperience" class="btn btn-xl">Done with Education</a>
+                <a href="addworkexperience" class="btn btn-md">Done with Education</a>
 
                 <!-- hide the link to add more educational achievements if there are 10 or more already entered -->
-                <a class="btn btn-xl" th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add More Educational Achievements</a>
+                <a class="btn btn-md" th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add More Educational Achievements</a>
 
-                <a class="btn btn-xl" href="index">Start Over</a>
+                <a class="btn btn-md" href="index">Start Over</a>
             </div>
         </div>
     </div>
