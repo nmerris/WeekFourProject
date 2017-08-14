@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col-lg-12 text-center">
             <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
-            <h5 class="section-heading">Please enter 1 - 10 educational achievements</h5>
+            <h5 class="section-heading">Please enter 0 - 10 work experiences</h5>
             <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' so far'"></h6>
 
           </div>
@@ -62,7 +62,6 @@
                 <div class="col-md-6 col-md-offset-3">
 
                   <div class="form-group">
-                    <p class="my-form-label">Job Title</p>
                     <label class="section-heading" for="jobTitle">Job Title</label>
                     <input id="jobTitle" class="form-control" type="text" th:field="*{jobTitle}"/>
                     <p class="help-block text-danger" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></p>
