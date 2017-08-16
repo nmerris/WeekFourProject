@@ -55,7 +55,7 @@ public class MainController {
     @GetMapping("/addperson")
     public String addPersonGet(Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson GET route ++++++++++++++++++");
-
+        model.addAttribute("currentNumRecords", personRepo.count());
         model.addAttribute("newPerson", new Person());
 
         return "addperson";

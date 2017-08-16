@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
@@ -35,43 +34,18 @@
 <!-- Contact -->
 <section id="contact">
     <div class="container">
-        <div class="row">
-            <!-- placholder so form is centered, could not get offset to work -->
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
 
-                <form action="#" th:action="@{/addperson}" th:object="${newPerson}" method="post">
-                    <!--<div class="row">-->
-                        <!--<div class="col-md-6 col-md-offset-3">-->
-
-                            <div class="form-group">
-                                <label class="section-heading" for="nameFirst">First Name</label>
-                                <input id="nameFirst" class="form-control" type="text" th:field="*{nameFirst}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('nameFirst')}" th:errors="*{nameFirst}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label class="section-heading" for="nameLast">Last Name</label>
-                                <input id="nameLast" class="form-control" type="text" th:field="*{nameLast}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('nameLast')}" th:errors="*{nameLast}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label class="section-heading" for="email">Email</label>
-                                <input id="email" class="form-control" type="text" th:field="*{email}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-                            </div>
-
-                        <div class="clearfix"></div>
-                        <!--<div class="col-lg-12 text-center">-->
-                            <input class="btn btn-md" type="submit" value="Submit" th:disabled="${currentNumRecords} &gt; 0"/>
-                            <input class="btn btn-md" type="reset" value="Reset"/>
-                        <!--</div>-->
-
-                        <!--</div>-->
-                    <!--</div>-->
-                </form>
+            <div class="col-lg-12 text-center">
+                <h2 th:hidden="${numPersons} &lt; 1" class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
 
             </div>
-        </div>
+
+            <div class="col-lg-12 text-center">
+
+                <a href="addperson" class="btn btn-xl" th:disabled="${numPersons} &gt; 0">Enter Personal Info</a>
+
+            </div>
+
     </div>
 </section>
 
@@ -79,8 +53,7 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <span class="copyright">Copyright &copy; Nathan Merris 2017</span>
             </div>
         </div>
