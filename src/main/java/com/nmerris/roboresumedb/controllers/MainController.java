@@ -212,6 +212,21 @@ public class MainController {
 
 
 
+    @GetMapping("/editdetails")
+    public String editDetails(Model model) {
+
+        addPersonNameToModel(model);
+
+        // there is only one person
+        model.addAttribute("persons", personRepo.findAll());
+        model.addAttribute("edAchievements", educationRepo.findAll());
+        model.addAttribute("workExperiences", workExperienceRepo.findAll());
+        model.addAttribute("skills", skillRepo.findAll());
+
+        return "editdetails";
+    }
+
+
     @GetMapping("/finalresume")
     public String finalResumeGet(Model model) {
 
