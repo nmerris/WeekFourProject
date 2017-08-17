@@ -78,8 +78,10 @@ public class MainController {
     }
 
     @PostMapping("/addperson")
-    public String addPersonPost(@Valid @ModelAttribute("newPerson") Person person, BindingResult bindingResult) {
+    public String addPersonPost(@Valid @ModelAttribute("newPerson") Person person,
+                                BindingResult bindingResult, Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
+        model.addAttribute("currentNumRecords", personRepo.count());
 
         if(bindingResult.hasErrors()) {
             return "addperson";
@@ -92,7 +94,8 @@ public class MainController {
         // the collections in Person are null at this point, which shows up as a BLOB in the db!  ...blob is you uncle
         personRepo.save(person);
 
-        return "redirect:/addeducation";
+        // go back to navi, which will show the users name at the top, no need for comfirmation here
+        return "redirect:/resumenavigation";
     }
 
 
