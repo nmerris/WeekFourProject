@@ -16,7 +16,7 @@
     </div>
 </section>
 
-
+<!-- educational achievement table -->
 <table>
     <thead>
     <tr>
@@ -28,7 +28,6 @@
     </thead>
 
     <th:block th:each="item:${edAchievements}">
-
         <tbody>
         <tr>
             <td><p th:text="${item.major}"/></td>
@@ -36,16 +35,73 @@
             <td><p th:text="${item.graduationYear}"/></td>
             <td>
                 <a th:href="@{/updateeducation/{id}(id=${item.id})}" class="action-link">Update</a>
-                <!--<a th:href="@{/delete/{id}(id=${item.id})?(type=education)}" class="action-link">Delete</a>-->
-                <!--<a th:href="@{/delete/{id}(id=${item.id})}" class="action-link">Delete</a>-->
+                <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
                 <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
-
             </td>
         </tr>
         </tbody>
     </th:block>
 </table>
 
+<!-- work experience table -->
+<table>
+    <thead>
+    <tr>
+        <th>Job Title</th>
+        <th>Company</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Duty One</th>
+        <th>Duty Two</th>
+    </tr>
+    </thead>
+
+    <th:block th:each="item:${workExperiences}">
+        <tbody>
+        <tr>
+            <td><p th:text="${item.jobTitle}"/></td>
+            <td><p th:text="${item.company}"/></td>
+            <td><p th:text="${item.dateStart}"/></td>
+            <td><p th:text="${item.dateEnd}"/></td>
+            <td><p th:text="${item.dutyOne}"/></td>
+            <td><p th:text="${item.dutyTwo}"/></td>
+            <td>
+                <a th:href="@{/updateworkexperience/{id}(id=${item.id})}" class="action-link">Update</a>
+                <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </th:block>
+</table>
+
+
+<!--skills table -->
+<table>
+    <thead>
+    <tr>
+        <th>Skill</th>
+        <th>Rating</th>
+    </tr>
+    </thead>
+
+    <th:block th:each="item:${skills}">
+        <tbody>
+        <tr>
+            <td><p th:text="${item.skill}"/></td>
+            <td><p th:text="${item.rating}"/></td>
+            <td>
+                <a th:href="@{/updateskill/{id}(id=${item.id})}" class="action-link">Update</a>
+                <a th:href="@{|/delete/${item.id}?type=skill|}" class="action-link">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </th:block>
+</table>
+
+<a class="btn btn-md" href="resumenavigation">Home</a>
+
+<!-- TODO add warning popup for Delete All! -->
+<a class="btn btn-md" href="resumenavigation">Delete Everything!</a>
 
 
 <!-- Footer -->
