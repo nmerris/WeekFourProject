@@ -62,8 +62,23 @@ public class MainController {
         model.addAttribute("numWorkExperiences", workExperienceRepo.count());
         addPersonNameToModel(model);
 
+        // disable link to add Person if already has one in db
+        // note a Person can be edited in other page
+        if(personRepo.count() > 0) {
+            model.addAttribute("disableAddPersonLink", true);
+        }
+
+        // do not allow any other details to be added until personal info entered
         if(personRepo.count() == 0 || educationRepo.count() > 10) {
             model.addAttribute("disableAddEdLink", true);
+        }
+
+        if(personRepo.count() == 0 || skillRepo.count() > 20) {
+            model.addAttribute("disableAddSkillLink", true);
+        }
+
+        if(personRepo.count() == 0 || workExperienceRepo.count() > 10) {
+            model.addAttribute("disableAddWorkExpLink", true);
         }
 
         return "resumenavigation";
