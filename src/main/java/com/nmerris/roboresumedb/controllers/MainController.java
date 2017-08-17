@@ -35,16 +35,17 @@ public class MainController {
 
     // home page
     @GetMapping(value = {"/index", "/"})
-    public String indexPageGet() {
+    public String indexPageGet(@RequestParam("startover") String deleteAll) {
         // need this so that the tables resets every time we go back to index
         // this is necessary so that the data is correct if the user chooses to 'start over'
 
-        // below comment out for testing
-//        personRepo.deleteAll();
-//        educationRepo.deleteAll();
-//        skillRepo.deleteAll();
-//        workExperienceRepo.deleteAll();
-
+        // wipe everything depending on request param
+        if(deleteAll.equals("true")) {
+            personRepo.deleteAll();
+            educationRepo.deleteAll();
+            skillRepo.deleteAll();
+            workExperienceRepo.deleteAll();
+        }
         return "index";
     }
 
