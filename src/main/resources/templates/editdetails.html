@@ -14,32 +14,7 @@
         </div>
 
 
-        <table>
-            <thead>
-            <tr>
-                <th>Major</th>
-                <th>School</th>
-                <th>Grad Year</th>
-                <th>Action</th>
-            </tr>
-            </thead>
 
-            <th:block th:each="item:${edAchievements}">
-
-                <tbody>
-                <tr>
-                    <td><p th:text="${item.major}"/></td>
-                    <td><p th:text="${item.school}"/></td>
-                    <td><p th:text="${item.graduationYear}"/></td>
-                    <td>
-                        <a th:href="@{/update/{id}(id=${item.id})}" class="action-link">Update</a>
-                        <!--<a th:href="@{/detail/{id}(id=${contact.id})}">Details</a>-->
-                        <a th:href="@{/delete/{id}(id=${item.id})}" class="action-link">Delete</a>
-                    </td>
-                </tr>
-                </tbody>
-            </th:block>
-        </table>
 
 
 
@@ -47,6 +22,35 @@
 
     </div>
 </section>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Major</th>
+        <th>School</th>
+        <th>Grad Year</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <th:block th:each="item:${edAchievements}">
+
+        <tbody>
+        <tr>
+            <td><p th:text="${item.major}"/></td>
+            <td><p th:text="${item.school}"/></td>
+            <td><p th:text="${item.graduationYear}"/></td>
+            <td>
+                <a th:href="@{/updateeducation/{id}(id=${item.id})}" class="action-link">Update</a>
+                <!--<a th:href="@{/delete/{id}(id=${item.id})}" class="action-link">Delete</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </th:block>
+</table>
+
+
 
 <!-- Footer -->
 <footer th:replace="fragments :: footer"></footer>

@@ -39,6 +39,7 @@ public class EducationAchievement {
     public String getSchool() {
         return school;
 }
+
     public void setSchool(String school) {
         this.school = school;
     }
@@ -49,5 +50,13 @@ public class EducationAchievement {
 
     public void setGraduationYear(long graduationYear) {
         this.graduationYear = graduationYear;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

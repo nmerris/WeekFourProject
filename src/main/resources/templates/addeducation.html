@@ -27,6 +27,10 @@
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
 
+                            <!-- need this or id is zero every time and keep getting additional records when updating -->
+                            <input type="hidden" th:field="*{id}" />
+
+
                             <div class="form-group">
                                 <label class="section-heading" for="school">School</label>
                                 <input id="school" class="form-control" type="text" th:field="*{school}"/>
@@ -45,7 +49,7 @@
 
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
-                                <input class="btn btn-md" type="submit" value="Submit" th:disabled="${currentNumRecords} &gt; 10"/>
+                                <input class="btn btn-md" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
                                 <input class="btn btn-md" type="reset" value="Reset"/>
 
                                 <!-- only allow user to continue if at least one record has been entered -->

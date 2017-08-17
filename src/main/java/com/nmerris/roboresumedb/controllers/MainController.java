@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -104,6 +105,12 @@ public class MainController {
     public String addEdGet(Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
 
+        if(educationRepo.count() >= 10) {
+            model.addAttribute("disableSubmit", true);
+        } else {
+            model.addAttribute("disableSubmit", false);
+        }
+
         model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("newEdAchievement", new EducationAchievement());
         addPersonNameToModel(model);
@@ -126,6 +133,9 @@ public class MainController {
             model.addAttribute("currentNumRecords", educationRepo.count());
             return "addeducation";
         }
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! addEd incoming Id: " + educationAchievement.getId() + "!!!!!!!!!!!!!!!!!!!!");
+
 
         educationRepo.save(educationAchievement);
 
@@ -225,6 +235,28 @@ public class MainController {
 
         return "editdetails";
     }
+
+
+
+
+    @GetMapping("/updateeducation/{id}")
+    public String updateEdAchievement(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("currentNumRecords", educationRepo.count());
+        // grab the record from db with id, send it back to entry form
+        model.addAttribute("newEdAchievement",educationRepo.findOne(id));
+        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
+        // user is only UPDATING an existing record here, so always allow submit from this route
+        model.addAttribute("disableSubmit", false);
+        return"addeducation";
+    }
+//
+//    @GetMapping("/delete/{id}")
+//    public String deleteProduct(@PathVariable("id") long id, Model model)
+//    {
+//        productRepo.delete(id);
+//        return"redirect:/admin";
+//    }
 
 
     @GetMapping("/finalresume")

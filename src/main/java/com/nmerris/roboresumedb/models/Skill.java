@@ -34,4 +34,12 @@ public class Skill {
     public void setRating(String rating) {
         this.rating = rating;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
