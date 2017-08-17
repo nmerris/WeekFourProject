@@ -61,29 +61,10 @@ public class MainController {
         model.addAttribute("numSkills", skillRepo.count());
         model.addAttribute("numWorkExperiences", workExperienceRepo.count());
         addPersonNameToModel(model);
-
-        // disable link to add Person if already has one in db
-        // note a Person can be edited in other page
-        if(personRepo.count() > 0) {
-            model.addAttribute("disableAddPersonLink", true);
-        }
-
-        // do not allow any other details to be added until personal info entered
-        if(personRepo.count() == 0 || educationRepo.count() > 10) {
-            model.addAttribute("disableAddEdLink", true);
-        }
-
-        if(personRepo.count() == 0 || skillRepo.count() > 20) {
-            model.addAttribute("disableAddSkillLink", true);
-        }
-
-        if(personRepo.count() == 0 || workExperienceRepo.count() > 10) {
-            model.addAttribute("disableAddWorkExpLink", true);
-        }
+        setLinkEnabledBooleans(model);
 
         return "resumenavigation";
     }
-
 
 
 
@@ -281,6 +262,48 @@ public class MainController {
         }
     }
 
+    private void setLinkEnabledBooleans(Model model) {
+        // disable link to add Person if already has one in db
+        // note a Person can be edited in other page
+        if(personRepo.count() > 0) {
+            model.addAttribute("disableAddPersonLink", true);
+        } else {
+            model.addAttribute("disableAddPersonLink", false);
+        }
+
+        // do not allow any other details to be added until personal info entered
+        if(personRepo.count() == 0 || educationRepo.count() > 10) {
+            model.addAttribute("disableAddEdLink", true);
+        } else {
+            model.addAttribute("disableAddEdLink", false);
+        }
+
+
+        if(personRepo.count() == 0 || skillRepo.count() > 20) {
+            model.addAttribute("disableAddSkillLink", true);
+        } else {
+            model.addAttribute("disableAddSkillLink", false);
+        }
+
+        if(personRepo.count() == 0 || workExperienceRepo.count() > 10) {
+            model.addAttribute("disableAddWorkExpLink", true);
+        } else {
+            model.addAttribute("disableAddWorkExpLink", false);
+        }
+
+        if(personRepo.count() == 0 && skillRepo.count() == 0 && educationRepo.count() == 0
+                && workExperienceRepo.count() == 0) {
+            model.addAttribute("disableEditDetailsLink", true);
+        } else {
+            model.addAttribute("disableEditDetailsLink", false);
+        }
+
+        if(personRepo.count() == 0 || skillRepo.count() == 0 || educationRepo.count() == 0) {
+            model.addAttribute("disableShowFinalResumeLink", true);
+        } else {
+            model.addAttribute("disableShowFinalResumeLink", false);
+        }
+    }
 
 
 }
