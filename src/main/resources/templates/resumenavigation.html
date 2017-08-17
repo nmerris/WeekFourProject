@@ -43,8 +43,11 @@
                 <a href="addperson" class="btn btn-xl" th:disabled="${numPersons} &gt; 0">Enter Personal Info</a>
             </div>
             <div class="col-lg-12 text-center">
-                <a href="addeducation" class="btn btn-xl disable-anchor disabled">Enter Educational Achievements</a>
-                <!--<a href="addeducation" class="btn btn-xl" th:disabled="(${numEdAchievements} &gt; 10) or (${numPersons} &lt; 1)">Enter Educational Achievements</a>-->
+                <!--<a href="addeducation" class="btn btn-xl"-->
+                   <!--th:if="${disableAddEdLink}" th:classappend="disabled"-->
+                   <!--th:if="${disableAddEdLink}" th:classappend="disable-anchor">Enter Educational Achievements</a>-->
+                <a href="addeducation" class="btn btn-xl"
+                   th:classappend="|${disableAddEdLink ? 'disabled' : ''} ${disableAddEdLink ? 'disable-anchor' : ''}|">Enter Educational Achievements</a>
             </div>
 
     </div>

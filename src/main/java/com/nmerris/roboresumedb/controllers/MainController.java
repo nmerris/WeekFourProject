@@ -62,7 +62,9 @@ public class MainController {
         model.addAttribute("numWorkExperiences", workExperienceRepo.count());
         addPersonNameToModel(model);
 
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% numPersons: " + personRepo.count());
+        if(personRepo.count() == 0 || educationRepo.count() > 10) {
+            model.addAttribute("disableAddEdLink", true);
+        }
 
         return "resumenavigation";
     }
