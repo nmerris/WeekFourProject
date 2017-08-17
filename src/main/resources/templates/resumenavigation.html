@@ -40,12 +40,12 @@
             </div>
 
             <div class="col-lg-12 text-center">
-                <a href="addperson" class="btn btn-xl" th:disabled="${numPersons} &gt; 0">Enter Personal Info</a>
+                <a href="addperson" class="btn btn-xl"
+                   th:classappend="|${disableAddPersonLink ? 'disabled' : ''} ${disableAddPersonLink ? 'disable-anchor' : ''}|">Enter Personal Info</a>
             </div>
             <div class="col-lg-12 text-center">
-                <!--<a href="addeducation" class="btn btn-xl"-->
-                   <!--th:if="${disableAddEdLink}" th:classappend="disabled"-->
-                   <!--th:if="${disableAddEdLink}" th:classappend="disable-anchor">Enter Educational Achievements</a>-->
+                <!-- disable the link if > 10 edAchievements already in db, do this with bootstrap class 'disabled' -->
+                <!-- and also with some custom javascript with class 'disable-anchor' -->
                 <a href="addeducation" class="btn btn-xl"
                    th:classappend="|${disableAddEdLink ? 'disabled' : ''} ${disableAddEdLink ? 'disable-anchor' : ''}|">Enter Educational Achievements</a>
             </div>
