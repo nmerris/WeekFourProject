@@ -36,14 +36,15 @@
     <div class="container">
 
             <div class="col-lg-12 text-center">
-                <h2 th:hidden="${numPersons} &lt; 1" class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
-
+                <h2 class="section-heading" th:text="${firstAndLastName}"></h2>
             </div>
 
             <div class="col-lg-12 text-center">
-
                 <a href="addperson" class="btn btn-xl" th:disabled="${numPersons} &gt; 0">Enter Personal Info</a>
-
+            </div>
+            <div class="col-lg-12 text-center">
+                <a href="addeducation" class="btn btn-xl disable-anchor disabled">Enter Educational Achievements</a>
+                <!--<a href="addeducation" class="btn btn-xl" th:disabled="(${numEdAchievements} &gt; 10) or (${numPersons} &lt; 1)">Enter Educational Achievements</a>-->
             </div>
 
     </div>
@@ -61,19 +62,20 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/popper/popper.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/popper/popper.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Contact form JavaScript -->
 <!--<script src="js/jqBootstrapValidation.js"></script>-->
 <!--<script src="js/contact_me.js"></script>-->
 
 <!-- Custom scripts for this template -->
-<script src="js/agency.min.js"></script>
+<script src="../js/agency.min.js"></script>
+<script src="../js/custom.js"></script>
 
 </body>
 

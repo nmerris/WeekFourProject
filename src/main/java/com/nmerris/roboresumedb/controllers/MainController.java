@@ -36,7 +36,7 @@ public class MainController {
 
 
     // home page
-    @GetMapping("/index")
+    @GetMapping(value = {"/index", "/"})
     public String indexPageGet() {
         // need this so that the tables resets every time we go back to index
         // this is necessary so that the data is correct if the user chooses to 'start over'
@@ -49,6 +49,24 @@ public class MainController {
 
         return "index";
     }
+
+
+
+
+    @GetMapping("/resumenavigation")
+    public String addResumeGet(Model model) {
+//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /resumenavigation GET route ++++++++++++++++++");
+        model.addAttribute("numPersons", personRepo.count());
+        model.addAttribute("numEdAchievements", educationRepo.count());
+        model.addAttribute("numSkills", skillRepo.count());
+        model.addAttribute("numWorkExperiences", workExperienceRepo.count());
+        addPersonNameToModel(model);
+
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% numPersons: " + personRepo.count());
+
+        return "resumenavigation";
+    }
+
 
 
 
@@ -241,7 +259,8 @@ public class MainController {
         } catch (Exception e) {
             // must not have found a Person in the db, so use a placeholder name
             // this is really convenient for testing, but it also makes the app less likely to crash
-            model.addAttribute("firstAndLastName", "Please enter a person");
+            // navi page will display below if no personal details entered yet
+            model.addAttribute("firstAndLastName", "Please start by entering personal details");
         }
     }
 
