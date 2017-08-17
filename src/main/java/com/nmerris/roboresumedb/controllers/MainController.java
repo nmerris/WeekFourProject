@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -105,7 +102,7 @@ public class MainController {
     public String addEdGet(Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
 
-        if(educationRepo.count() >= 10) {
+        if(educationRepo.count() >= 1) {
             model.addAttribute("disableSubmit", true);
         } else {
             model.addAttribute("disableSubmit", false);
@@ -133,9 +130,6 @@ public class MainController {
             model.addAttribute("currentNumRecords", educationRepo.count());
             return "addeducation";
         }
-
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! addEd incoming Id: " + educationAchievement.getId() + "!!!!!!!!!!!!!!!!!!!!");
-
 
         educationRepo.save(educationAchievement);
 
@@ -236,6 +230,30 @@ public class MainController {
         return "editdetails";
     }
 
+
+    // id is the id to delete
+    // type is what table to delete from
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id, @RequestParam("type") String type)
+    {
+//        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ path var: " + id);
+//        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ request param: " + type);
+
+        switch (type) {
+            case "ed" : educationRepo.delete(id);
+            break;
+
+            case "person" : personRepo.delete(id);
+            break;
+
+            case "workexp" : workExperienceRepo.delete(id);
+            break;
+
+            case "skill" : skillRepo.delete(id);
+        }
+
+        return"redirect:/resumenavigation";
+    }
 
 
 

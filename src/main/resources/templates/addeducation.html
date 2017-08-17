@@ -52,10 +52,7 @@
                                 <input class="btn btn-md" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
                                 <input class="btn btn-md" type="reset" value="Reset"/>
 
-                                <!-- only allow user to continue if at least one record has been entered -->
-                                <a class="btn btn-md" th:if="${currentNumRecords} &gt; 0" th:href="@{/addworkexperience}">Done with Education</a>
-
-                                <a class="btn btn-md" href="index">Start Over</a>
+                                <a class="btn btn-md" href="resumenavigation">Home</a>
 
                             </div>
 

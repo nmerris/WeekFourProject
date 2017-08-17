@@ -13,13 +13,6 @@
             <h2 class="section-heading" th:text="'Edit details for ' + ${firstAndLastName}"></h2>
         </div>
 
-
-
-
-
-
-
-
     </div>
 </section>
 
@@ -43,7 +36,10 @@
             <td><p th:text="${item.graduationYear}"/></td>
             <td>
                 <a th:href="@{/updateeducation/{id}(id=${item.id})}" class="action-link">Update</a>
+                <!--<a th:href="@{/delete/{id}(id=${item.id})?(type=education)}" class="action-link">Delete</a>-->
                 <!--<a th:href="@{/delete/{id}(id=${item.id})}" class="action-link">Delete</a>-->
+                <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
+
             </td>
         </tr>
         </tbody>
