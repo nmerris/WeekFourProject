@@ -1,3 +1,8 @@
+.disable-link-css {
+    pointer-events: none;
+    cursor: default;
+}
+
 .btn-xl {
     margin: 10px;
 }

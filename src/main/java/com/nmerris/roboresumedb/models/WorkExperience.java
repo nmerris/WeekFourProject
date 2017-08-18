@@ -22,10 +22,16 @@ public class WorkExperience {
     @Size(min = 3, max = 64)
     private String company;
 
+    // @Temporal required for validation
+    // @DateTimeFormat will show the date as given, but ONLY when being pulled out of db, will still be stored
+    // as full java.util.Date, which is what I want, for consistency
+    @NotNull
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MMM d, yyyy")
     private Date dateStart;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "MMM d, yyyy")
     private Date dateEnd;
 
     @Size(min = 3, max = 64)
@@ -81,4 +87,13 @@ public class WorkExperience {
     public void setDutyTwo(String dutyTwo) {
         this.dutyTwo = dutyTwo;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 }

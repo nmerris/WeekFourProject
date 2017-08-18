@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -35,7 +36,7 @@ public class MainController {
 
     // home page
     @GetMapping(value = {"/index", "/"})
-    public String indexPageGet(@RequestParam("startover") String deleteAll) {
+    public String indexPageGet(@RequestParam("startover") Optional<String> deleteAll) {
         // need this so that the tables resets every time we go back to index
         // this is necessary so that the data is correct if the user chooses to 'start over'
 
@@ -174,6 +175,14 @@ public class MainController {
             model.addAttribute("currentNumRecords", workExperienceRepo.count());
 
             return "addworkexperience";
+        }
+
+        // show end date as 'Present' if user did not enter end date, otherwise show whatever they entered
+        if(workExperience.getDateEnd() == null) {
+            model.addAttribute("dateEndString", "Present");
+        }
+        else {
+            model.addAttribute("dateEndString", Utilities.getMonthDayYearFromDate(workExperience.getDateEnd()));
         }
 
         workExperienceRepo.save(workExperience);

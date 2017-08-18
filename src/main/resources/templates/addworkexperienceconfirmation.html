@@ -15,8 +15,13 @@
 
                 <p class="section-heading" th:text="'Company just entered: ' + ${workExperienceJustAdded.company}"></p>
                 <p class="section-heading" th:text="'Job Title just entered: ' + ${workExperienceJustAdded.jobTitle}"></p>
+
+                <!--<p class="section-heading" th:text="'Start date just entered: ' + ${workExperienceJustAdded.dateStart}"></p>-->
                 <p class="section-heading" th:text="'Start date just entered: ' + ${#dates.format(workExperienceJustAdded.dateStart, 'MMM dd, yyyy')}"></p>
-                <p class="section-heading" th:text="'End date just entered: ' + ${#dates.format(workExperienceJustAdded.dateEnd, 'MMM dd, yyyy')}"></p>
+                <!--<p class="section-heading" th:text="'End date just entered: ' + ${workExperienceJustAdded.dateEnd}"></p>-->
+                <!--<p class="section-heading" th:text="'End date just entered: ' + ${#dates.format(workExperienceJustAdded.dateEnd, 'MMM dd, yyyy')}"></p>-->
+                <p class="section-heading" th:text="'End date just entered: ' + ${dateEndString}"></p>
+
                 <p class="section-heading" th:text="'Duty one just entered: ' + ${workExperienceJustAdded.dutyOne}"></p>
                 <p class="section-heading" th:text="'Duty two just entered: ' + ${workExperienceJustAdded.dutyTwo}"></p><br/>
 

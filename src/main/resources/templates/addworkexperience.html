@@ -32,14 +32,15 @@
                     <p class="help-block text-danger" th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></p>
                   </div>
                   <div class="form-group">
+
                     <label class="section-heading" for="startDate">Start Date</label>
                     <input id="startDate" class="form-control" type="text" th:field="*{dateStart}" th:placeholder="'Jul 4, 1976'"/>
                     <!-- I can note get @Temporal validation to work with messages.properties, so I just put it here -->
                     <p class="help-block text-danger" th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}" th:text="'Please enter a day, month, and year'"></p>
                   </div>
                   <div class="form-group">
-                    <label class="section-heading" for="endDate">End Date</label>
-                    <input id="endDate" class="form-control" type="text" th:field="*{dateEnd}" th:placeholder="${todaysDate}"/>
+                    <label class="section-heading" for="endDate">End Date - leave empty if currently employed</label>
+                    <input id="endDate" class="form-control" type="text" th:field="*{dateEnd}" th:placeholder="'Dec 25, 2000'"/>
                     <p class="help-block text-danger" th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}" th:text="'Please enter a day, month, and year'"></p>
                   </div>
                   <div class="form-group">
