@@ -21,6 +21,9 @@
               <div class="row">
                 <div class="col-md-6 col-md-offset-3">
 
+                  <!-- need this or id is zero every time and keep getting additional records when updating -->
+                  <input type="hidden" th:field="*{id}" />
+
                   <div class="form-group">
                     <label class="section-heading" for="jobTitle">Job Title</label>
                     <input id="jobTitle" class="form-control" type="text" th:field="*{jobTitle}"/>

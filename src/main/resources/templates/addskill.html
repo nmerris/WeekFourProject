@@ -30,6 +30,8 @@
                                 <p class="help-block text-danger" th:if="${#fields.hasErrors('skill')}" th:errors="*{skill}"></p>
                             </div>
 
+                            <!-- need this or id is zero every time and keep getting additional records when updating -->
+                            <input type="hidden" th:field="*{id}" />
 
                             <!-- label allows user to click the text OR the radio button to select, for convenience -->
                             <label class="section-heading" for="expertId">Expert</label>

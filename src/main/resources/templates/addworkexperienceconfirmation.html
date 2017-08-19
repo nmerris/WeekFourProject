@@ -29,13 +29,9 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-
-                <a href="addskill" class="btn btn-md">Done with Work Experiences</a>
-
-                <!-- hide the link to add more educational achievements if there are 10 or more already entered -->
-                <a class="btn btn-md" th:if="${currentNumRecords} &lt; 10" th:href="@{/addworkexperience}">Add more work experiences</a>
-
-                <a class="btn btn-md" href="index">Start Over</a>
+                <a class="btn btn-md" href="addworkexperience">Add Another</a>
+                <a class="btn btn-md" href="editdetails#workexperiences">Edit Resume Details</a>
+                <a class="btn btn-md" href="resumenavigation">Home</a>
 
             </div>
         </div>

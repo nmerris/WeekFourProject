@@ -74,6 +74,7 @@ public class MainController {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson GET route ++++++++++++++++++");
         model.addAttribute("currentNumRecords", personRepo.count());
         model.addAttribute("newPerson", new Person());
+        model.addAttribute("disableSubmit", personRepo.count() >= 1);
 
         return "addperson";
     }
@@ -88,8 +89,10 @@ public class MainController {
             return "addperson";
         }
 
+
+        // TODO remove res creation date from Person model, recreate db
         // set the resume creation date to right now
-        person.setResumeCreationDate(new Date());
+//        person.setResumeCreationDate(new Date());
 
         // person should have first and last names, and email at this point
         // the collections in Person are null at this point, which shows up as a BLOB in the db!  ...blob is you uncle
@@ -105,7 +108,9 @@ public class MainController {
     public String addEdGet(Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
 
-        // disable the submit button if >= 10 records in db
+        // disable the submit button if >= 10 records in db, it would never be possible for the user to click to get
+        // here from the navi page if there were already >= 10 records, however they could manually type in the URL
+        // so I want to disable the submit button if they do that and there are already 10 records
         model.addAttribute("disableSubmit", educationRepo.count() >= 10);
 
         model.addAttribute("currentNumRecords", educationRepo.count());
@@ -210,6 +215,7 @@ public class MainController {
 
         addPersonNameToModel(model);
         model.addAttribute("skillJustAdded", skill);
+        model.addAttribute("disableSubmit", skillRepo.count() >= 20);
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", skillRepo.count());
@@ -276,6 +282,41 @@ public class MainController {
         // user is only UPDATING an existing record here, so always allow submit from this route
         model.addAttribute("disableSubmit", false);
         return"addeducation";
+    }
+
+    @GetMapping("/updateperson/{id}")
+    public String updatePerson(@PathVariable("id") long id, Model model)
+    {
+        // grab the record from db with id, send it back to entry form
+        model.addAttribute("newPerson",personRepo.findOne(id));
+        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
+        // user is only UPDATING an existing record here, so always allow submit from this route
+        model.addAttribute("disableSubmit", false);
+        return"addperson";
+    }
+
+    @GetMapping("/updateworkexperience/{id}")
+    public String updateWorkExperience(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("currentNumRecords", workExperienceRepo.count());
+        // grab the record from db with id, send it back to entry form
+        model.addAttribute("newWorkExperience",workExperienceRepo.findOne(id));
+        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
+        // user is only UPDATING an existing record here, so always allow submit from this route
+        model.addAttribute("disableSubmit", false);
+        return"addworkexperience";
+    }
+
+    @GetMapping("/updateskill/{id}")
+    public String updateSkill(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("currentNumRecords", skillRepo.count());
+        // grab the record from db with id, send it back to entry form
+        model.addAttribute("newSkill",skillRepo.findOne(id));
+        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
+        // user is only UPDATING an existing record here, so always allow submit from this route
+        model.addAttribute("disableSubmit", false);
+        return"addskill";
     }
 
 

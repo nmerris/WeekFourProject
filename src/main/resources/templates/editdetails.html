@@ -5,7 +5,6 @@
 
 <body id="page-top">
 
-<!-- Contact -->
 <section id="contact">
     <div class="container">
 
@@ -16,87 +15,120 @@
     </div>
 </section>
 
-<!-- educational achievement table -->
-<table>
-    <thead>
-    <tr>
-        <th>Major</th>
-        <th>School</th>
-        <th>Grad Year</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-
-    <th:block th:each="item:${edAchievements}">
-        <tbody>
+<section id="person">
+    <h3>Personal Information</h3>
+    <table>
+        <thead>
         <tr>
-            <td><p th:text="${item.major}"/></td>
-            <td><p th:text="${item.school}"/></td>
-            <td><p th:text="${item.graduationYear}"/></td>
-            <td>
-                <a th:href="@{/updateeducation/{id}(id=${item.id})}" class="action-link">Update</a>
-                <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
-                <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
-            </td>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
         </tr>
-        </tbody>
-    </th:block>
-</table>
+        </thead>
 
-<!-- work experience table -->
-<table>
-    <thead>
-    <tr>
-        <th>Job Title</th>
-        <th>Company</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Duty One</th>
-        <th>Duty Two</th>
-    </tr>
-    </thead>
+        <th:block th:each="item:${persons}">
+            <tbody>
+            <tr>
+                <td><p th:text="${item.nameFirst}"/></td>
+                <td><p th:text="${item.nameLast}"/></td>
+                <td><p th:text="${item.email}"/></td>
+                <td>
+                    <a th:href="@{/updateperson/{id}(id=${item.id})}" class="action-link">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </th:block>
+    </table>
+</section>
 
-    <th:block th:each="item:${workExperiences}">
-        <tbody>
+<section id="education">
+    <h3>Educational Achievements</h3>
+    <table>
+        <thead>
         <tr>
-            <td><p th:text="${item.jobTitle}"/></td>
-            <td><p th:text="${item.company}"/></td>
-            <td><p th:text="${item.dateStart}"/></td>
-            <td><p th:text="${item.dateEnd}"/></td>
-            <td><p th:text="${item.dutyOne}"/></td>
-            <td><p th:text="${item.dutyTwo}"/></td>
-            <td>
-                <a th:href="@{/updateworkexperience/{id}(id=${item.id})}" class="action-link">Update</a>
-                <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>
-            </td>
+            <th>Major</th>
+            <th>School</th>
+            <th>Grad Year</th>
+            <th>Action</th>
         </tr>
-        </tbody>
-    </th:block>
-</table>
+        </thead>
 
+        <th:block th:each="item:${edAchievements}">
+            <tbody>
+            <tr>
+                <td><p th:text="${item.major}"/></td>
+                <td><p th:text="${item.school}"/></td>
+                <td><p th:text="${item.graduationYear}"/></td>
+                <td>
+                    <a th:href="@{/updateeducation/{id}(id=${item.id})}" class="action-link">Edit</a>
+                    <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
+                    <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </th:block>
+    </table>
+</section>
 
-<!--skills table -->
-<table>
-    <thead>
-    <tr>
-        <th>Skill</th>
-        <th>Rating</th>
-    </tr>
-    </thead>
-
-    <th:block th:each="item:${skills}">
-        <tbody>
+<section id="workexperiences">
+    <h3>Work Expereriences</h3>
+    <table>
+        <thead>
         <tr>
-            <td><p th:text="${item.skill}"/></td>
-            <td><p th:text="${item.rating}"/></td>
-            <td>
-                <a th:href="@{/updateskill/{id}(id=${item.id})}" class="action-link">Update</a>
-                <a th:href="@{|/delete/${item.id}?type=skill|}" class="action-link">Delete</a>
-            </td>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Duty One</th>
+            <th>Duty Two</th>
         </tr>
-        </tbody>
-    </th:block>
-</table>
+        </thead>
+
+        <th:block th:each="item:${workExperiences}">
+            <tbody>
+            <tr>
+                <td><p th:text="${item.jobTitle}"/></td>
+                <td><p th:text="${item.company}"/></td>
+                <td><p th:text="${item.dateStart}"/></td>
+                <td><p th:text="${item.dateEnd}"/></td>
+                <td><p th:text="${item.dutyOne}"/></td>
+                <td><p th:text="${item.dutyTwo}"/></td>
+                <td>
+                    <a th:href="@{/updateworkexperience/{id}(id=${item.id})}" class="action-link">Edit</a>
+                    <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </th:block>
+    </table>
+</section>
+
+<section id="skills">
+    <h3>Skills</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Skill</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+
+        <th:block th:each="item:${skills}">
+            <tbody>
+            <tr>
+                <td><p th:text="${item.skill}"/></td>
+                <td><p th:text="${item.rating}"/></td>
+                <td>
+                    <a th:href="@{/updateskill/{id}(id=${item.id})}" class="action-link">Edit</a>
+                    <a th:href="@{|/delete/${item.id}?type=skill|}" class="action-link">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </th:block>
+    </table>
+</section>
+
+
 
 <a class="btn btn-md" href="resumenavigation">Home</a>
 
