@@ -92,8 +92,8 @@
             <tr>
                 <td><p th:text="${item.jobTitle}"/></td>
                 <td><p th:text="${item.company}"/></td>
-                <td><p th:text="${item.dateStart}"/></td>
-                <td><p th:text="${item.dateEnd}"/></td>
+                <td><p th:text="${#dates.format(item.dateStart, 'MMM dd, yyyy')}"/></td>
+                <td><p th:text="${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy')} : 'Present'"/></td>
                 <td><p th:text="${item.dutyOne}"/></td>
                 <td><p th:text="${item.dutyTwo}"/></td>
                 <td>
