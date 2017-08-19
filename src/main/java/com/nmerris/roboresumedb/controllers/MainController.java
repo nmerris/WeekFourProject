@@ -249,7 +249,7 @@ public class MainController {
     // id is the id to delete
     // type is what table to delete from
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") long id, @RequestParam("type") String type)
+    public String delete(@PathVariable("id") long id, @RequestParam("type") String type, Model model)
     {
 //        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ path var: " + id);
 //        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ request param: " + type);
@@ -267,6 +267,14 @@ public class MainController {
             case "skill" :
                 skillRepo.delete(id);
         }
+
+        addPersonNameToModel(model);
+
+        // there is only one person
+        model.addAttribute("persons", personRepo.findAll());
+        model.addAttribute("edAchievements", educationRepo.findAll());
+        model.addAttribute("workExperiences", workExperienceRepo.findAll());
+        model.addAttribute("skills", skillRepo.findAll());
 
         return "editdetails";
     }
@@ -294,7 +302,7 @@ public class MainController {
             case "skill" :
                 model.addAttribute("newSkill",skillRepo.findOne(id));
                 model.addAttribute("currentNumRecords", skillRepo.count());
-                return "newskill";
+                return "addskill";
         }
 
         // should never happen, but need it to compiles
