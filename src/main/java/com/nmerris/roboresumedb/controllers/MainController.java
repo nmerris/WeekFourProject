@@ -268,7 +268,7 @@ public class MainController {
                 skillRepo.delete(id);
         }
 
-        return"redirect:/resumenavigation";
+        return "editdetails";
     }
 
 
