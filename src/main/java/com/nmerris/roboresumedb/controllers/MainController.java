@@ -34,13 +34,15 @@ public class MainController {
     WorkExperienceRepo workExperienceRepo;
 
 
-    // home page
+    // home page, start a new resume from here
     @GetMapping(value = {"/index", "/"})
     public String indexPageGet() {
         return "index";
     }
 
 
+    // any time this route is called, all db tables are wiped out
+    // TODO add a simple js popup alert box to avoid accidental data erasure
     @GetMapping("/startover")
     public String startOver() {
         personRepo.deleteAll();
@@ -56,7 +58,7 @@ public class MainController {
     // this will require editing the .disabled class in customstyles.css, and removing the .disable-anchor classappend from resumenavigation.html
     @GetMapping("/resumenavigation")
     public String addResumeGet(Model model) {
-//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /resumenavigation GET route ++++++++++++++++++");
+        // current db table record counts are used in various places in the template
         model.addAttribute("numPersons", personRepo.count());
         model.addAttribute("numEdAchievements", educationRepo.count());
         model.addAttribute("numSkills", skillRepo.count());
@@ -68,10 +70,8 @@ public class MainController {
     }
 
 
-
     @GetMapping("/addperson")
     public String addPersonGet(Model model) {
-//        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson GET route ++++++++++++++++++");
         model.addAttribute("currentNumRecords", personRepo.count());
         model.addAttribute("newPerson", new Person());
         model.addAttribute("disableSubmit", personRepo.count() >= 1);
@@ -233,14 +233,8 @@ public class MainController {
 
     @GetMapping("/editdetails")
     public String editDetails(Model model) {
-
         addPersonNameToModel(model);
-
-        // there is only one person
-        model.addAttribute("persons", personRepo.findAll());
-        model.addAttribute("edAchievements", educationRepo.findAll());
-        model.addAttribute("workExperiences", workExperienceRepo.findAll());
-        model.addAttribute("skills", skillRepo.findAll());
+        addDbContentsToModel(model);
 
         return "editdetails";
     }
@@ -269,12 +263,7 @@ public class MainController {
         }
 
         addPersonNameToModel(model);
-
-        // there is only one person
-        model.addAttribute("persons", personRepo.findAll());
-        model.addAttribute("edAchievements", educationRepo.findAll());
-        model.addAttribute("workExperiences", workExperienceRepo.findAll());
-        model.addAttribute("skills", skillRepo.findAll());
+        addDbContentsToModel(model);
 
         return "editdetails";
     }
@@ -327,29 +316,54 @@ public class MainController {
     }
 
 
+    /**
+     * Adds the entire contents of each database table to model. Note that the object names used here must match
+     * the names in the template being used.
+     */
+    private void addDbContentsToModel(Model model) {
+        // there is only one person
+        model.addAttribute("persons", personRepo.findAll());
+        model.addAttribute("edAchievements", educationRepo.findAll());
+        model.addAttribute("workExperiences", workExperienceRepo.findAll());
+        model.addAttribute("skills", skillRepo.findAll());
+    }
 
-    private void composePerson(Person p) {
+
+    /**
+     * Composes a person using the data from the tables in the database.  All records are read out and lists are
+     * populated in person for educational achievements, work experiences, and skills.  The person itself should already
+     * contain a first and last name, and an email address.  After calling this function, person should contain
+     * sufficient info to create a resume.
+     * @param person the Person to compose
+     */
+    private void composePerson(Person person) {
         // get all the records from the db
         ArrayList<EducationAchievement> edsArrayList = new ArrayList<>();
         for(EducationAchievement item : educationRepo.findAll()) {
             edsArrayList.add(item);
         }
         // add it to our Person
-        p.setEducationAchievements(edsArrayList);
+        person.setEducationAchievements(edsArrayList);
 
         ArrayList<WorkExperience> weArrayList = new ArrayList<>();
         for(WorkExperience item : workExperienceRepo.findAll()) {
             weArrayList.add(item);
         }
-        p.setWorkExperiences(weArrayList);
+        person.setWorkExperiences(weArrayList);
 
         ArrayList<Skill> skillsArrayList = new ArrayList<>();
         for(Skill item : skillRepo.findAll()) {
             skillsArrayList.add(item);
         }
-        p.setSkills(skillsArrayList);
+        person.setSkills(skillsArrayList);
     }
 
+
+    /**
+     * Adds an object (firstAndLastName) to model, that is a String of the first and last name of the Person for this
+     * resume. If the Person table is empty, an appropriate message is added to the model that will indicate to the user
+     * that they need to add start the resume by adding personal details.
+     */
     private void addPersonNameToModel(Model model) {
         try {
             // try to get the single Person from the db
@@ -364,14 +378,15 @@ public class MainController {
         }
     }
 
+
+    /**
+     * Set boolean flags for the various links in the navigation page.  Links are enabled/disabled based on various
+     * project criteria.
+     */
     private void setLinkEnabledBooleans(Model model) {
         // disable link to add Person if already has one in db
         // note a Person can be edited in other page
-        if(personRepo.count() > 0) {
-            model.addAttribute("disableAddPersonLink", true);
-        } else {
-            model.addAttribute("disableAddPersonLink", false);
-        }
+        model.addAttribute("disableAddPersonLink", personRepo.count() > 0);
 
         // do not allow any other details to be added until personal info entered
         if(personRepo.count() == 0 || educationRepo.count() > 10) {
@@ -380,19 +395,19 @@ public class MainController {
             model.addAttribute("disableAddEdLink", false);
         }
 
-
-        if(personRepo.count() == 0 || skillRepo.count() > 20) {
+        if(personRepo.count() == 0 || skillRepo.count() >= 20) {
             model.addAttribute("disableAddSkillLink", true);
         } else {
             model.addAttribute("disableAddSkillLink", false);
         }
 
-        if(personRepo.count() == 0 || workExperienceRepo.count() > 10) {
+        if(personRepo.count() == 0 || workExperienceRepo.count() >= 10) {
             model.addAttribute("disableAddWorkExpLink", true);
         } else {
             model.addAttribute("disableAddWorkExpLink", false);
         }
 
+        // disable edit link if no data has been entered yet
         if(personRepo.count() == 0 && skillRepo.count() == 0 && educationRepo.count() == 0
                 && workExperienceRepo.count() == 0) {
             model.addAttribute("disableEditDetailsLink", true);
@@ -400,6 +415,7 @@ public class MainController {
             model.addAttribute("disableEditDetailsLink", false);
         }
 
+        // disable show final resume link until at least one ed achievement, skill, and personal info has been entered
         if(personRepo.count() == 0 || skillRepo.count() == 0 || educationRepo.count() == 0) {
             model.addAttribute("disableShowFinalResumeLink", true);
         } else {
