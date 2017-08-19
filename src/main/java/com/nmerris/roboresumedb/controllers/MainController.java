@@ -36,20 +36,20 @@ public class MainController {
 
     // home page
     @GetMapping(value = {"/index", "/"})
-    public String indexPageGet(@RequestParam("startover") Optional<String> deleteAll) {
-        // need this so that the tables resets every time we go back to index
-        // this is necessary so that the data is correct if the user chooses to 'start over'
-
-        // wipe everything depending on request param
-        if(deleteAll.equals("true")) {
-            personRepo.deleteAll();
-            educationRepo.deleteAll();
-            skillRepo.deleteAll();
-            workExperienceRepo.deleteAll();
-        }
+    public String indexPageGet() {
         return "index";
     }
 
+
+    @GetMapping("/startover")
+    public String startOver() {
+        personRepo.deleteAll();
+        educationRepo.deleteAll();
+        skillRepo.deleteAll();
+        workExperienceRepo.deleteAll();
+
+        return "index";
+    }
 
 
     // TODO remove the js link disabling stuff before turning in project, just use CSS to disable mouse clicks
@@ -255,16 +255,17 @@ public class MainController {
 //        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ request param: " + type);
 
         switch (type) {
-            case "ed" : educationRepo.delete(id);
-            break;
-
-            case "person" : personRepo.delete(id);
-            break;
-
-            case "workexp" : workExperienceRepo.delete(id);
-            break;
-
-            case "skill" : skillRepo.delete(id);
+            case "ed" :
+                educationRepo.delete(id);
+                break;
+            case "person" :
+                personRepo.delete(id);
+                break;
+            case "workexp" :
+                workExperienceRepo.delete(id);
+                break;
+            case "skill" :
+                skillRepo.delete(id);
         }
 
         return"redirect:/resumenavigation";
@@ -276,6 +277,7 @@ public class MainController {
     public String update(@PathVariable("id") long id, @RequestParam("type") String type, Model model)
     {
         model.addAttribute("disableSubmit", false);
+        addPersonNameToModel(model);
 
         switch (type) {
             case "person" :
@@ -283,16 +285,17 @@ public class MainController {
                 return "addperson";
             case "ed" :
                 model.addAttribute("newEdAchievement",educationRepo.findOne(id));
+                model.addAttribute("currentNumRecords", educationRepo.count());
                 return "addeducation";
             case "workexp" :
                 model.addAttribute("newWorkExperience",workExperienceRepo.findOne(id));
+                model.addAttribute("currentNumRecords", workExperienceRepo.count());
                 return "addworkexperience";
             case "skill" :
                 model.addAttribute("newSkill",skillRepo.findOne(id));
+                model.addAttribute("currentNumRecords", skillRepo.count());
                 return "newskill";
         }
-
-
 
         // should never happen, but need it to compiles
         return"resumenavigation";
