@@ -52,7 +52,8 @@ public class MainController {
 
 
 
-
+    // TODO remove the js link disabling stuff before turning in project, just use CSS to disable mouse clicks
+    // this will require editing the .disabled class in customstyles.css, and removing the .disable-anchor classappend from resumenavigation.html
     @GetMapping("/resumenavigation")
     public String addResumeGet(Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /resumenavigation GET route ++++++++++++++++++");
@@ -104,11 +105,8 @@ public class MainController {
     public String addEdGet(Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addeducation GET route ++++++++++++++++++");
 
-        if(educationRepo.count() >= 1) {
-            model.addAttribute("disableSubmit", true);
-        } else {
-            model.addAttribute("disableSubmit", false);
-        }
+        // disable the submit button if >= 10 records in db
+        model.addAttribute("disableSubmit", educationRepo.count() >= 10);
 
         model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("newEdAchievement", new EducationAchievement());
@@ -148,9 +146,10 @@ public class MainController {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience GET route ++++++++++++++++++");
 
         // it would be nice to show todays date as placeholder text for end date
-        model.addAttribute("todaysDate", Utilities.getTodaysDateString());
+//        model.addAttribute("todaysDate", Utilities.getTodaysDateString());
 
         addPersonNameToModel(model);
+        model.addAttribute("disableSubmit", workExperienceRepo.count() >= 10);
         model.addAttribute("currentNumRecords", workExperienceRepo.count());
         model.addAttribute("newWorkExperience", new WorkExperience());
 
@@ -278,13 +277,7 @@ public class MainController {
         model.addAttribute("disableSubmit", false);
         return"addeducation";
     }
-//
-//    @GetMapping("/delete/{id}")
-//    public String deleteProduct(@PathVariable("id") long id, Model model)
-//    {
-//        productRepo.delete(id);
-//        return"redirect:/admin";
-//    }
+
 
 
     @GetMapping("/finalresume")

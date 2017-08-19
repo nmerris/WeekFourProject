@@ -22,10 +22,7 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <a href="addworkexperience" class="btn btn-md">Done with Education</a>
-
-                <!-- hide the link to add more educational achievements if there are 10 or more already entered -->
-                <a class="btn btn-md" th:if="${currentNumRecords} &lt; 10" th:href="@{/addeducation}">Add More Educational Achievements</a>
+                <a class="btn btn-md" th:disabled="${currentNumRecords} &gt; 10">Add Another</a>
                 <a class="btn btn-md" href="resumenavigation">Home</a>
 
             </div>
