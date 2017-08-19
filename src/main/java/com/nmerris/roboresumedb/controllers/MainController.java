@@ -272,51 +272,30 @@ public class MainController {
 
 
 
-    @GetMapping("/updateeducation/{id}")
-    public String updateEdAchievement(@PathVariable("id") long id, Model model)
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") long id, @RequestParam("type") String type, Model model)
     {
-        model.addAttribute("currentNumRecords", educationRepo.count());
-        // grab the record from db with id, send it back to entry form
-        model.addAttribute("newEdAchievement",educationRepo.findOne(id));
-        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
-        // user is only UPDATING an existing record here, so always allow submit from this route
         model.addAttribute("disableSubmit", false);
-        return"addeducation";
-    }
 
-    @GetMapping("/updateperson/{id}")
-    public String updatePerson(@PathVariable("id") long id, Model model)
-    {
-        // grab the record from db with id, send it back to entry form
-        model.addAttribute("newPerson",personRepo.findOne(id));
-        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
-        // user is only UPDATING an existing record here, so always allow submit from this route
-        model.addAttribute("disableSubmit", false);
-        return"addperson";
-    }
+        switch (type) {
+            case "person" :
+                model.addAttribute("newPerson",personRepo.findOne(id));
+                return "addperson";
+            case "ed" :
+                model.addAttribute("newEdAchievement",educationRepo.findOne(id));
+                return "addeducation";
+            case "workexp" :
+                model.addAttribute("newWorkExperience",workExperienceRepo.findOne(id));
+                return "addworkexperience";
+            case "skill" :
+                model.addAttribute("newSkill",skillRepo.findOne(id));
+                return "newskill";
+        }
 
-    @GetMapping("/updateworkexperience/{id}")
-    public String updateWorkExperience(@PathVariable("id") long id, Model model)
-    {
-        model.addAttribute("currentNumRecords", workExperienceRepo.count());
-        // grab the record from db with id, send it back to entry form
-        model.addAttribute("newWorkExperience",workExperienceRepo.findOne(id));
-        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
-        // user is only UPDATING an existing record here, so always allow submit from this route
-        model.addAttribute("disableSubmit", false);
-        return"addworkexperience";
-    }
 
-    @GetMapping("/updateskill/{id}")
-    public String updateSkill(@PathVariable("id") long id, Model model)
-    {
-        model.addAttribute("currentNumRecords", skillRepo.count());
-        // grab the record from db with id, send it back to entry form
-        model.addAttribute("newSkill",skillRepo.findOne(id));
-        // ALWAYS enable the submit button from this route, because even if there are already 10+ records in db
-        // user is only UPDATING an existing record here, so always allow submit from this route
-        model.addAttribute("disableSubmit", false);
-        return"addskill";
+
+        // should never happen, but need it to compiles
+        return"resumenavigation";
     }
 
 
