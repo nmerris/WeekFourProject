@@ -1,10 +1,7 @@
 package com.nmerris.roboresumedb.controllers;
 
 import com.nmerris.roboresumedb.Utilities;
-import com.nmerris.roboresumedb.models.EducationAchievement;
-import com.nmerris.roboresumedb.models.Person;
-import com.nmerris.roboresumedb.models.Skill;
-import com.nmerris.roboresumedb.models.WorkExperience;
+import com.nmerris.roboresumedb.models.*;
 import com.nmerris.roboresumedb.repositories.EducationRepo;
 import com.nmerris.roboresumedb.repositories.PersonRepo;
 import com.nmerris.roboresumedb.repositories.SkillRepo;
@@ -17,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -55,15 +49,15 @@ public class MainController {
 
 
 
-    @GetMapping("/resumenavigation")
-    public String addResumeGet(Model model) {
-
-        addDbTableCountsToModel(model);
-        addPersonNameToModel(model);
-        setLinkEnabledBooleans(model);
-
-        return "resumenavigation";
-    }
+//    @GetMapping("/resumenavigation")
+//    public String addResumeGet(Model model) {
+//
+//        addDbTableCountsToModel(model);
+//        addPersonNameToModel(model);
+//        setLinkEnabledBooleans(model);
+//
+//        return "resumenavigation";
+//    }
 
 
 
@@ -72,8 +66,13 @@ public class MainController {
         model.addAttribute("currentNumRecords", personRepo.count());
         model.addAttribute("newPerson", new Person());
         model.addAttribute("disableSubmit", personRepo.count() >= 1);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightPersonNav(true);
+        model.addAttribute("pageState", pageState);
+
         addDbTableCountsToModel(model);
+
 
         return "addperson";
     }
@@ -84,11 +83,18 @@ public class MainController {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
         model.addAttribute("currentNumRecords", personRepo.count());
         addDbTableCountsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+        PageLinkState pageState = getPageLinkState();
+
 
         if(bindingResult.hasErrors()) {
+            pageState.setHighlightPersonNav(true);
+            model.addAttribute("pageState", pageState);
             return "addperson";
         }
+
+        pageState.setHighlightEdNav(true);
+        model.addAttribute("pageState", pageState);
 
 
         // TODO remove res creation date from Person model, recreate db
@@ -113,12 +119,22 @@ public class MainController {
         // here from the navi page if there were already >= 10 records, however they could manually type in the URL
         // so I want to disable the submit button if they do that and there are already 10 records
         model.addAttribute("disableSubmit", educationRepo.count() >= 10);
-        addDbTableCountsToModel(model);
-        setLinkEnabledBooleans(model);
-
         model.addAttribute("currentNumRecords", educationRepo.count());
-        model.addAttribute("newEdAchievement", new EducationAchievement());
+
+        addDbTableCountsToModel(model);
+//        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightEdNav(true);
+        model.addAttribute("pageState", pageState);
+
         addPersonNameToModel(model);
+
+
+
+
+
+        model.addAttribute("newEdAchievement", new EducationAchievement());
 
         return "addeducation";
     }
@@ -130,7 +146,12 @@ public class MainController {
 
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         addPersonNameToModel(model);
-        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightEdNav(true);
+        model.addAttribute("pageState", pageState);
+
+        //        setLinkEnabledBooleans(model);
         addDbTableCountsToModel(model);
 
 
@@ -159,7 +180,11 @@ public class MainController {
         // it would be nice to show todays date as placeholder text for end date
 //        model.addAttribute("todaysDate", Utilities.getTodaysDateString());
         addDbTableCountsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightWorkNav(true);
+        model.addAttribute("pageState", pageState);
 
         addPersonNameToModel(model);
         model.addAttribute("disableSubmit", workExperienceRepo.count() >= 10);
@@ -176,7 +201,11 @@ public class MainController {
 
         addPersonNameToModel(model);
         addDbTableCountsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightWorkNav(true);
+        model.addAttribute("pageState", pageState);
 
         // add a placeholder for end date that is todays date, because why not?
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
@@ -215,7 +244,11 @@ public class MainController {
         model.addAttribute("currentNumRecords", skillRepo.count());
         model.addAttribute("newSkill", new Skill());
         addDbTableCountsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightSkillNav(true);
+        model.addAttribute("pageState", pageState);
 
         return "addskill";
     }
@@ -229,7 +262,11 @@ public class MainController {
         model.addAttribute("skillJustAdded", skill);
         model.addAttribute("disableSubmit", skillRepo.count() >= 20);
         addDbTableCountsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightSkillNav(true);
+        model.addAttribute("pageState", pageState);
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", skillRepo.count());
@@ -249,7 +286,11 @@ public class MainController {
     public String editDetails(Model model) {
         addPersonNameToModel(model);
         addDbContentsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightEditNav(true);
+        model.addAttribute("pageState", pageState);
 
         return "editdetails";
     }
@@ -277,9 +318,13 @@ public class MainController {
                 skillRepo.delete(id);
         }
 
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightEditNav(true);
+        model.addAttribute("pageState", pageState);
+
         addPersonNameToModel(model);
         addDbContentsToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
         addDbTableCountsToModel(model);
 
         return "editdetails";
@@ -292,24 +337,36 @@ public class MainController {
     {
         model.addAttribute("disableSubmit", false);
         addPersonNameToModel(model);
-        setLinkEnabledBooleans(model);
+//        setLinkEnabledBooleans(model);
         addDbTableCountsToModel(model);
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightEditNav(true);
+        model.addAttribute("pageState", pageState);
 
         switch (type) {
             case "person" :
                 model.addAttribute("newPerson",personRepo.findOne(id));
+                pageState.setHighlightPersonNav(true);
+                model.addAttribute("pageState", pageState);
                 return "addperson";
             case "ed" :
                 model.addAttribute("newEdAchievement",educationRepo.findOne(id));
                 model.addAttribute("currentNumRecords", educationRepo.count());
+                pageState.setHighlightEdNav(true);
+                model.addAttribute("pageState", pageState);
                 return "addeducation";
             case "workexp" :
                 model.addAttribute("newWorkExperience",workExperienceRepo.findOne(id));
                 model.addAttribute("currentNumRecords", workExperienceRepo.count());
+                pageState.setHighlightWorkNav(true);
+                model.addAttribute("pageState", pageState);
                 return "addworkexperience";
             case "skill" :
                 model.addAttribute("newSkill",skillRepo.findOne(id));
                 model.addAttribute("currentNumRecords", skillRepo.count());
+                pageState.setHighlightSkillNav(true);
+                model.addAttribute("pageState", pageState);
                 return "addskill";
         }
 
@@ -321,6 +378,10 @@ public class MainController {
 
     @GetMapping("/finalresume")
     public String finalResumeGet(Model model) {
+
+        PageLinkState pageState = getPageLinkState();
+        pageState.setHighlightFinalNav(true);
+        model.addAttribute("pageState", pageState);
 
         // get the one and only person from the db
         // it is not possible to get here unless a Person exists, and the other resume data has been entered
@@ -334,6 +395,33 @@ public class MainController {
         return "finalresume";
     }
 
+    
+
+    private PageLinkState getPageLinkState() {
+        // the navi links are disabled depending on the number of records in the various db tables
+        // also, the 'highlighted' nav bar choice is set in each route
+        PageLinkState pageState = new PageLinkState();
+
+        pageState.setDisablePersonLink(personRepo.count() > 0);
+
+        pageState.setDisableAddEdLink(personRepo.count() == 0 || educationRepo.count() > 10);
+
+        pageState.setDisableAddSkillLink(personRepo.count() == 0 || skillRepo.count() >= 20);
+
+        pageState.setDisableAddWorkExpLink(personRepo.count() == 0 || workExperienceRepo.count() >= 10);
+
+        // disable edit link if no data has been entered yet
+        pageState.setDisableEditDetailsLink(personRepo.count() == 0 && skillRepo.count() == 0 && educationRepo.count() == 0
+                && workExperienceRepo.count() == 0);
+
+        // disable show final resume link until at least one ed achievement, skill, and personal info has been entered
+        pageState.setDisableShowFinalLink(personRepo.count() == 0 || skillRepo.count() == 0 || educationRepo.count() == 0);
+
+        return pageState;
+    }
+    
+    
+    
 
     /**
      * Adds the entire contents of each database table to model. Note that the object names used here must match
@@ -402,45 +490,45 @@ public class MainController {
      * Set boolean flags for the various links in the navigation page.  Links are enabled/disabled based on various
      * project criteria.
      */
-    private void setLinkEnabledBooleans(Model model) {
-        // disable link to add Person if already has one in db
-        // note a Person can be edited in other page
-        model.addAttribute("disableAddPersonLink", personRepo.count() > 0);
-
-        // do not allow any other details to be added until personal info entered
-        if(personRepo.count() == 0 || educationRepo.count() > 10) {
-            model.addAttribute("disableAddEdLink", true);
-        } else {
-            model.addAttribute("disableAddEdLink", false);
-        }
-
-        if(personRepo.count() == 0 || skillRepo.count() >= 20) {
-            model.addAttribute("disableAddSkillLink", true);
-        } else {
-            model.addAttribute("disableAddSkillLink", false);
-        }
-
-        if(personRepo.count() == 0 || workExperienceRepo.count() >= 10) {
-            model.addAttribute("disableAddWorkExpLink", true);
-        } else {
-            model.addAttribute("disableAddWorkExpLink", false);
-        }
-
-        // disable edit link if no data has been entered yet
-        if(personRepo.count() == 0 && skillRepo.count() == 0 && educationRepo.count() == 0
-                && workExperienceRepo.count() == 0) {
-            model.addAttribute("disableEditDetailsLink", true);
-        } else {
-            model.addAttribute("disableEditDetailsLink", false);
-        }
-
-        // disable show final resume link until at least one ed achievement, skill, and personal info has been entered
-        if(personRepo.count() == 0 || skillRepo.count() == 0 || educationRepo.count() == 0) {
-            model.addAttribute("disableShowFinalResumeLink", true);
-        } else {
-            model.addAttribute("disableShowFinalResumeLink", false);
-        }
-    }
+//    private void setLinkEnabledBooleans(Model model) {
+//        // disable link to add Person if already has one in db
+//        // note a Person can be edited in other page
+//        model.addAttribute("disableAddPersonLink", personRepo.count() > 0);
+//
+//        // do not allow any other details to be added until personal info entered
+//        if(personRepo.count() == 0 || educationRepo.count() > 10) {
+//            model.addAttribute("disableAddEdLink", true);
+//        } else {
+//            model.addAttribute("disableAddEdLink", false);
+//        }
+//
+//        if(personRepo.count() == 0 || skillRepo.count() >= 20) {
+//            model.addAttribute("disableAddSkillLink", true);
+//        } else {
+//            model.addAttribute("disableAddSkillLink", false);
+//        }
+//
+//        if(personRepo.count() == 0 || workExperienceRepo.count() >= 10) {
+//            model.addAttribute("disableAddWorkExpLink", true);
+//        } else {
+//            model.addAttribute("disableAddWorkExpLink", false);
+//        }
+//
+//        // disable edit link if no data has been entered yet
+//        if(personRepo.count() == 0 && skillRepo.count() == 0 && educationRepo.count() == 0
+//                && workExperienceRepo.count() == 0) {
+//            model.addAttribute("disableEditDetailsLink", true);
+//        } else {
+//            model.addAttribute("disableEditDetailsLink", false);
+//        }
+//
+//        // disable show final resume link until at least one ed achievement, skill, and personal info has been entered
+//        if(personRepo.count() == 0 || skillRepo.count() == 0 || educationRepo.count() == 0) {
+//            model.addAttribute("disableShowFinalResumeLink", true);
+//        } else {
+//            model.addAttribute("disableShowFinalResumeLink", false);
+//        }
+//    }
 
 
     private void addDbTableCountsToModel(Model model) {
