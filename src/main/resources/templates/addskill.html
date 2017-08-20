@@ -9,23 +9,20 @@
 <!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable and highlight -->
 <nav th:replace="fragments :: navbar(${pageState})"></nav>
 
-<!-- Contact -->
-<section id="contact">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
-                <h5 class="section-heading">Please enter 1 - 20 skills</h5>
-                <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' so far'"></h6>
-
+            <div class="col-sm-12 text-center">
+                <h2 th:text="'Resume for ' + ${firstAndLastName}"></h2>
+                <span class="glyphicon glyphicon-star"></span>
+                <span th:text="${currentNumRecords} + ' of 20 skills entered'"></span>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
 
                 <form action="#" th:action="@{/addskill}" th:object="${newSkill}" method="post">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-sm-6 col-sm-offset-3">
 
                             <div class="form-group">
                                 <label class="section-heading" for="skill">Skill</label>
@@ -50,12 +47,9 @@
                         </div>
 
                         <div class="clearfix"></div>
-                        <div class="col-lg-12 text-center">
+                        <div class="col-sm-12 text-center">
 
-                            <input class="btn btn-md" type="submit" value="Submit" th:disabled="${currentNumRecords} &gt; 20"/>
-                            <!--<input class="btn btn-md" type="reset" value="Reset"/>-->
-
-                            <!--<a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>-->
+                            <input class="btn btn-sm" type="submit" value="Submit" th:disabled="${currentNumRecords} &gt; 20"/>
 
                         </div>
 
@@ -64,7 +58,6 @@
             </div>
         </div>
     </div>
-</section>
 
 <!-- Footer -->
 <footer th:replace="fragments :: footer"></footer>
