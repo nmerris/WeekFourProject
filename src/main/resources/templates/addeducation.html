@@ -13,9 +13,8 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <h2 th:text="'Resume for ' + ${firstAndLastName}"></h2>
-                <!-- TODO glyphicon should be on the same line as the text -->
-                <div class="glyphicon glyphicon-education"></div>
-                <p th:text="${currentNumRecords} + ' of 10 educational achievements entered'"></p>
+                <span class="glyphicon glyphicon-education"></span>
+                <span th:text="${currentNumRecords} + ' of 10 educational achievements entered'"></span>
             </div>
         </div>
 
