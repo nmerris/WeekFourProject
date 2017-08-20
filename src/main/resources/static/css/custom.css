@@ -7,3 +7,7 @@ body {
     pointer-events: none;
     cursor: default;
 }
+
+.bold-input {
+    font-weight:bold;
+}
