@@ -3,6 +3,12 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments :: headerFragment"></head>
+  <body>
+
+  <!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable or not -->
+  <nav th:replace="fragments :: navbar(${disableAddPersonLink}, ${disableAddEdLink}, ${disableAddWorkExpLink}, ${disableAddSkillLink}, ${disableEditDetailsLink}, ${disableShowFinalResumeLink})"></nav>
+
+
 
     <section id="contact">
       <div class="container">
@@ -61,9 +67,9 @@
                 <div class="col-lg-12 text-center">
                   <div id="success"></div>
                   <input class="btn btn-md" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
-                  <input class="btn btn-md" type="reset" value="Reset"/>
+                  <!--<input class="btn btn-md" type="reset" value="Reset"/>-->
 
-                  <a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>
+                  <!--<a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>-->
 
                 </div>
 

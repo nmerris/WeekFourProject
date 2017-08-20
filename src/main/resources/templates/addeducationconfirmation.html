@@ -6,6 +6,9 @@
 
 <body id="page-top">
 
+<!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable or not -->
+<nav th:replace="fragments :: navbar(${disableAddPersonLink}, ${disableAddEdLink}, ${disableAddWorkExpLink}, ${disableAddSkillLink}, ${disableEditDetailsLink}, ${disableShowFinalResumeLink})"></nav>
+
 <section id="contact">
     <div class="container">
         <div class="row">
@@ -23,8 +26,8 @@
             <div class="col-lg-12">
 
                 <a class="btn btn-md" href="addeducation">Add Another</a>
-                <a class="btn btn-md" href="editdetails#education">Edit Resume Details</a>
-                <a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>
+                <!--<a class="btn btn-md" href="editdetails#education">Edit Resume Details</a>-->
+                <!--<a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>-->
 
             </div>
         </div>

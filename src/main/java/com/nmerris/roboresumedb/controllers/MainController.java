@@ -54,15 +54,11 @@ public class MainController {
     }
 
 
-    // TODO remove the js link disabling stuff before turning in project, just use CSS to disable mouse clicks
-    // this will require editing the .disabled class in customstyles.css, and removing the .disable-anchor classappend from resumenavigation.html
+
     @GetMapping("/resumenavigation")
     public String addResumeGet(Model model) {
-        // current db table record counts are used in various places in the template
-        model.addAttribute("numPersons", personRepo.count());
-        model.addAttribute("numEdAchievements", educationRepo.count());
-        model.addAttribute("numSkills", skillRepo.count());
-        model.addAttribute("numWorkExperiences", workExperienceRepo.count());
+
+        addDbTableCountsToModel(model);
         addPersonNameToModel(model);
         setLinkEnabledBooleans(model);
 
@@ -70,11 +66,14 @@ public class MainController {
     }
 
 
+
     @GetMapping("/addperson")
     public String addPersonGet(Model model) {
         model.addAttribute("currentNumRecords", personRepo.count());
         model.addAttribute("newPerson", new Person());
         model.addAttribute("disableSubmit", personRepo.count() >= 1);
+        setLinkEnabledBooleans(model);
+        addDbTableCountsToModel(model);
 
         return "addperson";
     }
@@ -84,6 +83,8 @@ public class MainController {
                                 BindingResult bindingResult, Model model) {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addperson POST route ++++++++++++++++++");
         model.addAttribute("currentNumRecords", personRepo.count());
+        addDbTableCountsToModel(model);
+        setLinkEnabledBooleans(model);
 
         if(bindingResult.hasErrors()) {
             return "addperson";
@@ -98,8 +99,8 @@ public class MainController {
         // the collections in Person are null at this point, which shows up as a BLOB in the db!  ...blob is you uncle
         personRepo.save(person);
 
-        // go back to navi, which will show the users name at the top, no need for comfirmation here
-        return "redirect:/resumenavigation";
+        // go to education section automatically, it's the most logical
+        return "redirect:/addeducation";
     }
 
 
@@ -112,7 +113,7 @@ public class MainController {
         // here from the navi page if there were already >= 10 records, however they could manually type in the URL
         // so I want to disable the submit button if they do that and there are already 10 records
         model.addAttribute("disableSubmit", educationRepo.count() >= 10);
-
+        addDbTableCountsToModel(model);
         setLinkEnabledBooleans(model);
 
         model.addAttribute("currentNumRecords", educationRepo.count());
@@ -130,6 +131,7 @@ public class MainController {
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         addPersonNameToModel(model);
         setLinkEnabledBooleans(model);
+        addDbTableCountsToModel(model);
 
 
         if(bindingResult.hasErrors()) {
@@ -156,6 +158,8 @@ public class MainController {
 
         // it would be nice to show todays date as placeholder text for end date
 //        model.addAttribute("todaysDate", Utilities.getTodaysDateString());
+        addDbTableCountsToModel(model);
+        setLinkEnabledBooleans(model);
 
         addPersonNameToModel(model);
         model.addAttribute("disableSubmit", workExperienceRepo.count() >= 10);
@@ -171,6 +175,8 @@ public class MainController {
 //        System.out.println("++++++++++++++++++++++++++++++ JUST ENTERED /addworkexperience POST route ++++++++++++++++++ ");
 
         addPersonNameToModel(model);
+        addDbTableCountsToModel(model);
+        setLinkEnabledBooleans(model);
 
         // add a placeholder for end date that is todays date, because why not?
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
@@ -208,6 +214,8 @@ public class MainController {
         addPersonNameToModel(model);
         model.addAttribute("currentNumRecords", skillRepo.count());
         model.addAttribute("newSkill", new Skill());
+        addDbTableCountsToModel(model);
+        setLinkEnabledBooleans(model);
 
         return "addskill";
     }
@@ -220,6 +228,8 @@ public class MainController {
         addPersonNameToModel(model);
         model.addAttribute("skillJustAdded", skill);
         model.addAttribute("disableSubmit", skillRepo.count() >= 20);
+        addDbTableCountsToModel(model);
+        setLinkEnabledBooleans(model);
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("currentNumRecords", skillRepo.count());
@@ -239,6 +249,7 @@ public class MainController {
     public String editDetails(Model model) {
         addPersonNameToModel(model);
         addDbContentsToModel(model);
+        setLinkEnabledBooleans(model);
 
         return "editdetails";
     }
@@ -268,6 +279,8 @@ public class MainController {
 
         addPersonNameToModel(model);
         addDbContentsToModel(model);
+        setLinkEnabledBooleans(model);
+        addDbTableCountsToModel(model);
 
         return "editdetails";
     }
@@ -279,6 +292,8 @@ public class MainController {
     {
         model.addAttribute("disableSubmit", false);
         addPersonNameToModel(model);
+        setLinkEnabledBooleans(model);
+        addDbTableCountsToModel(model);
 
         switch (type) {
             case "person" :
@@ -299,7 +314,7 @@ public class MainController {
         }
 
         // should never happen, but need it to compiles
-        return"resumenavigation";
+        return"index";
     }
 
 
@@ -427,5 +442,13 @@ public class MainController {
         }
     }
 
+
+    private void addDbTableCountsToModel(Model model) {
+        // current db table record counts are used in various places in the template
+        model.addAttribute("numPersons", personRepo.count());
+        model.addAttribute("numEdAchievements", educationRepo.count());
+        model.addAttribute("numSkills", skillRepo.count());
+        model.addAttribute("numWorkExperiences", workExperienceRepo.count());
+    }
 
 }

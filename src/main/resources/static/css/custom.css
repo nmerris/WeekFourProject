@@ -1,4 +1,9 @@
-.disable-link-css {
+body {
+    min-height: 2000px;
+    padding-top: 70px;
+}
+
+.disable-click {
     pointer-events: none;
     cursor: default;
 }
