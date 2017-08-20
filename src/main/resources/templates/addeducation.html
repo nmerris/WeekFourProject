@@ -12,10 +12,10 @@
 
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
+                <h2 th:text="'Resume for ' + ${firstAndLastName}"></h2>
                 <!-- TODO glyphicon should be on the same line as the text -->
                 <div class="glyphicon glyphicon-education"></div>
-                <div th:text="${currentNumRecords} + ' of 10 educational achievements entered'"></div>
+                <p th:text="${currentNumRecords} + ' of 10 educational achievements entered'"></p>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
 
                 <form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-sm-6 col-sm-offset-3">
 
                             <!-- need this or id is zero every time and keep getting additional records when updating -->
                             <input type="hidden" th:field="*{id}" />
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="clearfix"></div>
-                            <input class="btn btn-md" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
+                            <input class="btn btn-primary" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
 
                         </div>
                     </div>
