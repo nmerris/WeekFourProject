@@ -51,10 +51,12 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li th:classappend="${navState.highlightEditNav ? 'active' : ''}">
-                        <a href="editdetails" th:classappend="${navState.disableEditDetailsLink ? 'disable-click' : ''}">Edit Details</a>
+
+
+                        <a href="editdetails" th:classappend="${navState.disableEditDetailsLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-pencil"></span>Edit Details</a>
                     </li>
                     <li th:classappend="${navState.highlightFinalNav ? 'active' : ''}">
-                        <a href="finalresume" th:classappend="${navState.disableShowFinalLink ? 'disable-click' : ''}">Final Resume</a>
+                        <a href="finalresume" th:classappend="${navState.disableShowFinalLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-eye-open"></span>Final Resume</a>
                     </li>
                 </ul>
 

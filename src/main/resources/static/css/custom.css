@@ -11,3 +11,7 @@ body {
 .bold-input {
     font-weight:bold;
 }
+
+.glyphicon {
+    color: #428BCA;
+}
