@@ -6,7 +6,8 @@
 <body>
 
 <!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable or not -->
-<nav th:replace="fragments :: navbar(${disableAddPersonLink}, ${disableAddEdLink}, ${disableAddWorkExpLink}, ${disableAddSkillLink}, ${disableEditDetailsLink}, ${disableShowFinalResumeLink})"></nav>
+<nav th:replace="fragments :: navbar(${pageState})></nav>
+<!--<nav th:replace="fragments :: navbar(${disableAddPersonLink}, ${disableAddEdLink}, ${disableAddWorkExpLink}, ${disableAddSkillLink}, ${disableEditDetailsLink}, ${disableShowFinalResumeLink})"></nav>-->
 
     <div class="container">
 

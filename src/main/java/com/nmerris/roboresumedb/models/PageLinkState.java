@@ -18,19 +18,19 @@ public class PageLinkState {
     
     
     public PageLinkState() {
-        highlightPersonNav = false;
-        highlightEdNav = false;
-        highlightWorkNav = false;
-        highlightSkillNav = false;
-        highlightEditNav = false;
-        highlightFinalNav = false;
+//        highlightPersonNav = false;
+//        highlightEdNav = false;
+//        highlightWorkNav = false;
+//        highlightSkillNav = false;
+//        highlightEditNav = false;
+//        highlightFinalNav = false;
 
-        disablePersonLink = false;
-        disableAddEdLink = false;
-        disableAddSkillLink = false;
-        disableAddWorkExpLink = false;
-        disableEditDetailsLink = false;
-        disableShowFinalLink = false;
+//        disablePersonLink = false;
+//        disableAddEdLink = false;
+//        disableAddSkillLink = false;
+//        disableAddWorkExpLink = false;
+//        disableEditDetailsLink = false;
+//        disableShowFinalLink = false;
     }
 
     public boolean getHighlightPersonNav() {
