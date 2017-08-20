@@ -113,6 +113,8 @@ public class MainController {
         // so I want to disable the submit button if they do that and there are already 10 records
         model.addAttribute("disableSubmit", educationRepo.count() >= 10);
 
+        setLinkEnabledBooleans(model);
+
         model.addAttribute("currentNumRecords", educationRepo.count());
         model.addAttribute("newEdAchievement", new EducationAchievement());
         addPersonNameToModel(model);
@@ -127,6 +129,8 @@ public class MainController {
 
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         addPersonNameToModel(model);
+        setLinkEnabledBooleans(model);
+
 
         if(bindingResult.hasErrors()) {
             // need to get the count even if an error, because we always show the count
