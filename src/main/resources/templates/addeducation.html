@@ -3,65 +3,95 @@
 
 <head th:replace="fragments :: headerFragment"></head>
 
-<body id="page-top">
-
-<!-- Contact -->
-<section id="contact">
+<body>
     <div class="container">
 
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
-                <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' of 10 educational achievements'"></h6>
+        <form id="contact" action="" method="post">
+            <h3>Colorlib Contact Form</h3>
+            <h4>Contact us for custom quote</h4>
+            <fieldset>
+                <input placeholder="Your name" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Your Email Address" type="email" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Your Phone Number (optional)" type="tel" tabindex="3" required>
+            </fieldset>
+            <fieldset>
+                <input placeholder="Your Web Site (optional)" type="url" tabindex="4" required>
+            </fieldset>
+            <fieldset>
+                <textarea placeholder="Type your message here...." tabindex="5" required></textarea>
+            </fieldset>
+            <fieldset>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            </fieldset>
+            <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a></p>
+        </form>
 
-            </div>
-        </div>
-
-        <div class="row center-block">
-            <!-- placholder so form is centered, could not get offset to work -->
-            <!--<div class="col-lg-2"></div>-->
-            <div class="col-lg-12">
-
-                <form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-
-                            <!-- need this or id is zero every time and keep getting additional records when updating -->
-                            <input type="hidden" th:field="*{id}" />
 
 
-                            <div class="form-group">
-                                <label class="section-heading" for="school">School</label>
-                                <input id="school" class="form-control" type="text" th:field="*{school}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('school')}" th:errors="*{school}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label class="section-heading" for="major">Major</label>
-                                <input id="major" class="form-control" type="text" th:field="*{major}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('major')}" th:errors="*{major}"></p>
-                            </div>
-                            <div class="form-group">
-                                <label class="section-heading" for="graduationYear">Graduation Year</label>
-                                <input id="graduationYear" class="form-control" type="text" th:field="*{graduationYear}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('graduationYear')}" th:errors="*{graduationYear}"></p>
-                            </div>
 
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <input class="btn btn-md" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
-                                <input class="btn btn-md" type="reset" value="Reset"/>
 
-                                <a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>
 
-                            </div>
 
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+
+
+
+
+        <!--<div class="row">-->
+            <!--<div class="col-lg-12 text-center">-->
+                <!--<h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>-->
+                <!--<h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' of 10 educational achievements'"></h6>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row center-block">-->
+            <!--&lt;!&ndash; placholder so form is centered, could not get offset to work &ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-lg-2"></div>&ndash;&gt;-->
+            <!--<div class="col-lg-12">-->
+
+                <!--<form action="#" th:action="@{/addeducation}" th:object="${newEdAchievement}" method="post">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-6 col-md-offset-3">-->
+
+                            <!--&lt;!&ndash; need this or id is zero every time and keep getting additional records when updating &ndash;&gt;-->
+                            <!--<input type="hidden" th:field="*{id}" />-->
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="section-heading" for="school">School</label>-->
+                                <!--<input id="school" class="form-control" type="text" th:field="*{school}"/>-->
+                                <!--<p class="help-block text-danger" th:if="${#fields.hasErrors('school')}" th:errors="*{school}"></p>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="section-heading" for="major">Major</label>-->
+                                <!--<input id="major" class="form-control" type="text" th:field="*{major}"/>-->
+                                <!--<p class="help-block text-danger" th:if="${#fields.hasErrors('major')}" th:errors="*{major}"></p>-->
+                            <!--</div>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="section-heading" for="graduationYear">Graduation Year</label>-->
+                                <!--<input id="graduationYear" class="form-control" type="text" th:field="*{graduationYear}"/>-->
+                                <!--<p class="help-block text-danger" th:if="${#fields.hasErrors('graduationYear')}" th:errors="*{graduationYear}"></p>-->
+                            <!--</div>-->
+
+                            <!--<div class="clearfix"></div>-->
+                            <!--<div class="col-lg-12 text-center">-->
+                                <!--<input class="btn btn-md" type="submit" value="Submit" th:disabled="${disableSubmit}"/>-->
+                                <!--<input class="btn btn-md" type="reset" value="Reset"/>-->
+
+                                <!--<a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>-->
+
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
-</section>
 
 <!-- Footer -->
 <footer th:replace="fragments :: footer"></footer>

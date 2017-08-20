@@ -18,14 +18,18 @@ public class EducationAchievement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Size(min = 2, max = 64)
+//    @Size(min = 2, max = 64)
+    @NotEmpty
     private String major;
-    @Size(min = 2, max = 64)
+
+//    @Size(min = 2, max = 64)
+    @NotEmpty
     private String school;
 
 
-    @Min(1920)
-    @Max(2020) // it's possible someone might want to make their resume before they graduate
+//    @Min(1920)
+//    @Max(2020) // it's possible someone might want to make their resume before they graduate
+    @NotNull
     private long graduationYear;
 
     public String getMajor() {
