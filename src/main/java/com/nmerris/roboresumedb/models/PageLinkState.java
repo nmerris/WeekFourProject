@@ -81,7 +81,7 @@ public class PageLinkState {
         this.highlightFinalNav = highlightFinalNav;
     }
 
-    public boolean isDisablePersonLink() {
+    public boolean getDisablePersonLink() {
         return disablePersonLink;
     }
 
@@ -89,7 +89,7 @@ public class PageLinkState {
         this.disablePersonLink = disablePersonLink;
     }
 
-    public boolean isDisableAddEdLink() {
+    public boolean getDisableAddEdLink() {
         return disableAddEdLink;
     }
 
@@ -97,7 +97,7 @@ public class PageLinkState {
         this.disableAddEdLink = disableAddEdLink;
     }
 
-    public boolean isDisableAddSkillLink() {
+    public boolean getDisableAddSkillLink() {
         return disableAddSkillLink;
     }
 
@@ -105,7 +105,7 @@ public class PageLinkState {
         this.disableAddSkillLink = disableAddSkillLink;
     }
 
-    public boolean isDisableAddWorkExpLink() {
+    public boolean getDisableAddWorkExpLink() {
         return disableAddWorkExpLink;
     }
 
@@ -113,7 +113,7 @@ public class PageLinkState {
         this.disableAddWorkExpLink = disableAddWorkExpLink;
     }
 
-    public boolean isDisableEditDetailsLink() {
+    public boolean getDisableEditDetailsLink() {
         return disableEditDetailsLink;
     }
 
@@ -121,7 +121,7 @@ public class PageLinkState {
         this.disableEditDetailsLink = disableEditDetailsLink;
     }
 
-    public boolean isDisableShowFinalLink() {
+    public boolean getDisableShowFinalLink() {
         return disableShowFinalLink;
     }
 

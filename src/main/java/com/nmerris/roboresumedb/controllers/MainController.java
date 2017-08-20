@@ -74,6 +74,8 @@ public class MainController {
         addDbTableCountsToModel(model);
 
 
+        System.out.println("############################################## disableAddEdLink" + pageState.getDisableAddEdLink());
+
         return "addperson";
     }
 
@@ -399,7 +401,7 @@ public class MainController {
 
     private PageLinkState getPageLinkState() {
         // the navi links are disabled depending on the number of records in the various db tables
-        // also, the 'highlighted' nav bar choice is set in each route
+        // note: the 'highlighted' nav bar choice is set in each route
         PageLinkState pageState = new PageLinkState();
 
         pageState.setDisablePersonLink(personRepo.count() > 0);
