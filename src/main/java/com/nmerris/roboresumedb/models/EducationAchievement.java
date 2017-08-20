@@ -26,10 +26,7 @@ public class EducationAchievement {
     @NotEmpty
     private String school;
 
-
-//    @Min(1920)
-//    @Max(2020) // it's possible someone might want to make their resume before they graduate
-    @NotNull
+    @Min(1900)
     private long graduationYear;
 
     public String getMajor() {
