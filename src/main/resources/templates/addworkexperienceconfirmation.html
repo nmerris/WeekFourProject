@@ -14,28 +14,26 @@
             <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h2 class="" th:text="'Resume for ' + ${firstAndLastName}"></h2>
                 <span class="glyphicon glyphicon-briefcase"></span>
-                <p class="section-heading" th:text="${currentNumRecords} + ' entries'"></p>
+                <span class="section-heading" th:text="${currentNumRecords} + ' entries'"></span>
 
-                <p class="" th:text="'Company just entered: ' + ${workExperienceJustAdded.company}"></p>
-                <p class="" th:text="'Job Title just entered: ' + ${workExperienceJustAdded.jobTitle}"></p>
-
-                <!--<p class="" th:text="'Start date just entered: ' + ${workExperienceJustAdded.dateStart}"></p>-->
-                <p class="" th:text="'Start date just entered: ' + ${#dates.format(workExperienceJustAdded.dateStart, 'MMM dd, yyyy')}"></p>
-                <!--<p class="" th:text="'End date just entered: ' + ${workExperienceJustAdded.dateEnd}"></p>-->
-                <!--<p class="" th:text="'End date just entered: ' + ${#dates.format(workExperienceJustAdded.dateEnd, 'MMM dd, yyyy')}"></p>-->
-                <p class="" th:text="'End date just entered: ' + ${dateEndString}"></p>
-
-                <p class="" th:text="'Duty one just entered: ' + ${workExperienceJustAdded.dutyOne}"></p>
-                <p class="" th:text="'Duty two just entered: ' + ${workExperienceJustAdded.dutyTwo}"></p><br/>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h4><b>Work Experiences</b></h4></div>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:text="'Company: ' + ${workExperienceJustAdded.company}"></li>
+                        <li class="list-group-item" th:text="'Job Title: ' + ${workExperienceJustAdded.jobTitle}"></li>
+                        <li class="list-group-item" th:text="'Start date: ' + ${#dates.format(workExperienceJustAdded.dateStart, 'MMM dd, yyyy')}"></li>
+                        <li class="list-group-item" th:text="'End date: ' + ${dateEndString}"></li>
+                        <li class="list-group-item" th:text="'Duty one: ' + ${workExperienceJustAdded.dutyOne}"></li>
+                        <li class="list-group-item" th:text="'Duty two: ' + ${workExperienceJustAdded.dutyTwo}"></li>
+                    </ul>
+                </div>
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <a class="btn btn-md" href="addworkexperience">Add Another</a>
-                <!--<a class="btn btn-md" href="editdetails#workexperiences">Edit Resume Details</a>-->
-                <!--<a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>-->
 
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <a class="btn btn-primary" href="addworkexperience">+ Add Another</a>
             </div>
         </div>
     </div>
