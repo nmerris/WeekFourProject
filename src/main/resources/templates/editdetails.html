@@ -16,8 +16,9 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <section id="person" class="section-heading">
-                <h3>Personal Information</h3>
+
                 <table>
+                    <caption><h3><b>Personal Information</b></h3></caption>
                     <thead>
                     <tr>
                         <th>First Name</th>
@@ -83,28 +84,29 @@
         <div class="col-sm-8 col-sm-offset-2">
             <section id="workexperiences">
 
-                <table>
+                <table class="table-hover table-condensed table-responsive">
                     <caption><h3><b>Work Experiences</b></h3></caption>
                     <thead>
                     <tr>
+                        <!-- don't need to show every detail here, fits on screen better without so many columns -->
                         <th>Job Title</th>
                         <th>Company</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Duty One</th>
-                        <th>Duty Two</th>
+                        <!--<th>Duty One</th>-->
+                        <!--<th>Duty Two</th>-->
                         <th>Action</th>
                     </tr>
                     </thead>
                     <th:block th:each="item:${workExperiences}">
                         <tbody>
                         <tr>
-                            <td><p class="truncate workexptext" th:text="${item.jobTitle}"></p></td>
-                            <td><p class="truncate workexptext" th:text="${item.company}"></p></td>
+                            <td><p class="truncate" th:text="${item.jobTitle}"></p></td>
+                            <td><p class="truncate" th:text="${item.company}"></p></td>
                             <td><p th:text="${#dates.format(item.dateStart, 'MMM dd, yyyy')}"></p></td>
                             <td><p th:text="${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy')} : 'Present'"></p></td>
-                            <td><p class="truncate workexptext" th:text="${item.dutyOne}"></p></td>
-                            <td><p class="truncate workexptext" th:text="${item.dutyTwo}"></p></td>
+                            <!--<td><p class="truncate" th:text="${item.dutyOne}"></p></td>-->
+                            <!--<td><p class="truncate" th:text="${item.dutyTwo}"></p></td>-->
                             <td>
                                 <a th:href="@{|/update/${item.id}/?type=workexp|}" class="action-link">Edit</a>
                                 <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>
