@@ -70,6 +70,8 @@
         </table>
     </section>
 
+        
+        
     <section id="workexperiences">
         <h3>Work Expereriences</h3>
         <table>
@@ -87,12 +89,12 @@
             <th:block th:each="item:${workExperiences}">
                 <tbody>
                 <tr>
-                    <td><p th:text="${item.jobTitle}"/></td>
-                    <td><p th:text="${item.company}"/></td>
-                    <td><p th:text="${#dates.format(item.dateStart, 'MMM dd, yyyy')}"/></td>
-                    <td><p th:text="${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy')} : 'Present'"/></td>
-                    <td><p th:text="${item.dutyOne}"/></td>
-                    <td><p th:text="${item.dutyTwo}"/></td>
+                    <td><p class="truncate" th:text="${item.jobTitle}"></p></td>
+                    <td><p class="truncate" th:text="${item.company}"></p></td>
+                    <td><p class="truncate" th:text="${#dates.format(item.dateStart, 'MMM dd, yyyy')}"></p></td>
+                    <td><p class="truncate" th:text="${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy')} : 'Present'"></p></td>
+                    <td><p class="truncate" th:text="${item.dutyOne}"></p></td>
+                    <td><p class="truncate" th:text="${item.dutyTwo}"></p></td>
                     <td>
                         <a th:href="@{|/update/${item.id}/?type=workexp|}" class="action-link">Edit</a>
                         <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>

@@ -53,7 +53,7 @@ table a:hover {
     text-decoration:underline;
 }
 table {
-    width:100%;
+    width: 100%;
 
     font-family:Arial, Helvetica, sans-serif;
     color:#666;
@@ -104,11 +104,13 @@ table td:first-child {
     border-left: 0;
 }
 table td {
+
     padding:18px;
     border-top: 1px solid #ffffff;
     border-bottom:1px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
 
+    background: #fafafa;
     background: #fafafa;
     background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
     background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
@@ -135,4 +137,13 @@ table tr:hover td {
     background: #f2f2f2;
     background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
     background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+}
+
+/* can end up with really wide tables if you don't truncate the cells contents */
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 51px;
+    max-height: 51px;
 }
