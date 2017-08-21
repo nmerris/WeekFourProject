@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
@@ -17,6 +16,7 @@
                 <span th:text="${currentNumRecords} + ' of 20 skills entered'"></span>
             </div>
         </div>
+
         <div class="row">
             <div class="col-sm-12">
 
@@ -24,38 +24,32 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
 
-                            <div class="form-group">
-                                <label class="section-heading" for="skill">Skill</label>
-                                <input id="skill" class="form-control" type="text" th:field="*{skill}"/>
-                                <p class="help-block text-danger" th:if="${#fields.hasErrors('skill')}" th:errors="*{skill}"></p>
-                            </div>
-
                             <!-- need this or id is zero every time and keep getting additional records when updating -->
                             <input type="hidden" th:field="*{id}" />
 
+                            <div class="form-group">
+                                <label class="section-heading" for="skill">Skill</label>
+                                <input id="skill" class="form-control" type="text" th:field="*{skill}"/>
+                                <p class="alert alert-danger" th:if="${#fields.hasErrors('skill')}" th:errors="*{skill}"></p>
+                            </div>
+
                             <!-- label allows user to click the text OR the radio button to select, for convenience -->
                             <label class="section-heading" for="expertId">Expert</label>
-                            <input type="radio" name="rating" id="expertId" value="Expert" th:field="*{rating}"/><br/>
+                            <input type="radio" name="rating" id="expertId" value="Expert" th:field="*{rating}"/>
                             <label class="section-heading" for="proficientId">Proficient</label>
-                            <input type="radio" name="rating" id="proficientId" value="Proficient" th:field="*{rating}"/><br/>
+                            <input type="radio" name="rating" id="proficientId" value="Proficient" th:field="*{rating}"/>
                             <label class="section-heading" for="familiarId">Familiar</label>
-                            <input type="radio" name="rating" id="familiarId" value="Familiar" th:field="*{rating}"/><br/>
+                            <input type="radio" name="rating" id="familiarId" value="Familiar" th:field="*{rating}"/>
+                            <p class="alert alert-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></p>
 
-
-                            <p class="help-block text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></p>
-                            <!--<p class="help-block text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" th:text="'Please enter a rating'"></p>-->
-
-                        </div>
 
                         <div class="clearfix"></div>
-                        <div class="col-sm-12 text-center">
-
-                            <input class="btn btn-sm" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
+                        <input class="alert alert-danger" type="submit" value="Submit" th:disabled="${disableSubmit}"/>
 
                         </div>
-
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

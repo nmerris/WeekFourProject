@@ -26,3 +26,10 @@ body {
 .panel-primary {
     margin-top: 10px;
 }
+
+input[type="radio"] {
+    margin-top: 4x;
+    margin-left: 3px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
