@@ -35,28 +35,26 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li th:classappend="${navState.highlightPersonNav ? 'active' : ''}">
-                        <a href="addperson" th:classappend="${navState.disablePersonLink ? 'disable-click' : ''}">Personal</a>
+                        <a th:href="@{/addperson}" th:classappend="${navState.disablePersonLink ? 'disable-click' : ''}">Personal</a>
                     </li>
 
                     <li th:classappend="${navState.highlightEdNav ? 'active' : ''}">
-                        <a href="addeducation" th:classappend="${navState.disableAddEdLink ? 'disable-click' : ''}">Education</a>
+                        <a th:href="@{/addeducation}" th:classappend="${navState.disableAddEdLink ? 'disable-click' : ''}">Education</a>
                     </li>
                     <li th:classappend="${navState.highlightWorkNav ? 'active' : ''}">
-                        <a href="addworkexperience" th:classappend="${navState.disableAddWorkExpLink ? 'disable-click' : ''}">Work</a>
+                        <a th:href="@{/addworkexperience}" th:classappend="${navState.disableAddWorkExpLink ? 'disable-click' : ''}">Work</a>
                     </li>
                     <li th:classappend="${navState.highlightSkillNav ? 'active' : ''}">
-                        <a href="addskill" th:classappend="${navState.disableAddSkillLink ? 'disable-click' : ''}">Skills</a>
+                        <a th:href="@{/addskill}" th:classappend="${navState.disableAddSkillLink ? 'disable-click' : ''}">Skills</a>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li th:classappend="${navState.highlightEditNav ? 'active' : ''}">
-
-
-                        <a href="editdetails" th:classappend="${navState.disableEditDetailsLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-pencil"></span>Edit Details</a>
+                        <a th:href="@{/editdetails}" th:classappend="${navState.disableEditDetailsLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-pencil"></span>Edit Details</a>
                     </li>
                     <li th:classappend="${navState.highlightFinalNav ? 'active' : ''}">
-                        <a href="finalresume" th:classappend="${navState.disableShowFinalLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-eye-open"></span>View Resume</a>
+                        <a th:href="@{/finalresume}" th:classappend="${navState.disableShowFinalLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-eye-open"></span>View Resume</a>
                     </li>
                 </ul>
 
