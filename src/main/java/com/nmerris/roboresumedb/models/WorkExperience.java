@@ -19,6 +19,7 @@ public class WorkExperience {
 
 //    @Size(min = 3, max = 64)
     @NotEmpty
+    @Size(max = 100)
     private String jobTitle;
 
 
