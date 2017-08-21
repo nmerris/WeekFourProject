@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,11 +21,14 @@ public class Person {
     
     // fields to save in the db
     @NotEmpty
+    @Size(max = 50)
     private String nameFirst;
     @NotEmpty
+    @Size(max = 50)
     private String nameLast;
     @NotEmpty
     @Email
+    @Size(max = 50)
     private String email;
 
     // the date the resume was created, automatically generated, not a user input

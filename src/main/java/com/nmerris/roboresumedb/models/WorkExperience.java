@@ -19,12 +19,13 @@ public class WorkExperience {
 
 //    @Size(min = 3, max = 64)
     @NotEmpty
-    @Size(max = 100)
+    @Size(max = 50)
     private String jobTitle;
 
 
 //    @Size(min = 3, max = 64)
     @NotEmpty
+    @Size(max = 50)
     private String company;
 
     // @Temporal required for validation
@@ -41,9 +42,11 @@ public class WorkExperience {
 
 //    @Size(min = 3, max = 64)
     @NotEmpty
+    @Size(max = 50)
     private String dutyOne;
 
     // second duty is optional
+    @Size(max = 50)
     private String dutyTwo;
 
     public String getJobTitle() {

@@ -20,10 +20,12 @@ public class EducationAchievement {
 
 //    @Size(min = 2, max = 64)
     @NotEmpty
+    @Size(max = 50)
     private String major;
 
 //    @Size(min = 2, max = 64)
     @NotEmpty
+    @Size(max = 50)
     private String school;
 
     @Min(1900)

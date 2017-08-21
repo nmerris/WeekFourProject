@@ -17,6 +17,7 @@ public class Skill {
     private long id;
 
     @NotEmpty
+    @Size(max = 50)
     private String skill;
     @NotEmpty
     private String rating;
