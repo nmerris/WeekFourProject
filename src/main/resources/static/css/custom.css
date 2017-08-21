@@ -43,6 +43,7 @@ input[type="radio"] {
 table {
     width:100%;
     border-collapse: collapse;
+    /*table-layout: fixed;*/
 }
 
 td {

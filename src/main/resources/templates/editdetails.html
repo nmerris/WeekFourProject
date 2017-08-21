@@ -24,6 +24,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <th:block th:each="item:${persons}">
@@ -84,18 +85,19 @@
         <div class="col-sm-8 col-sm-offset-2">
             <section id="workexperiences">
 
-                <table class="table-hover table-condensed table-responsive">
+                <table>
+                <!--<table class="table-hover table-condensed">-->
                     <caption><h3><b>Work Experiences</b></h3></caption>
                     <thead>
-                    <tr>
-                        <!-- don't need to show every detail here, fits on screen better without so many columns -->
-                        <th>Job Title</th>
-                        <th>Company</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <!--<th>Duty One</th>-->
-                        <!--<th>Duty Two</th>-->
-                        <th>Action</th>
+                        <tr>
+                            <!-- don't need to show every detail here, fits on screen better without so many columns -->
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <!--<th>Duty One</th>-->
+                            <!--<th>Duty Two</th>-->
+                        <th colspan="2">Action</th>
                     </tr>
                     </thead>
                     <th:block th:each="item:${workExperiences}">
@@ -108,8 +110,11 @@
                             <!--<td><p class="truncate" th:text="${item.dutyOne}"></p></td>-->
                             <!--<td><p class="truncate" th:text="${item.dutyTwo}"></p></td>-->
                             <td>
-                                <a th:href="@{|/update/${item.id}/?type=workexp|}" class="action-link">Edit</a>
-                                <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>
+                                <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
+                                <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
                             </td>
                         </tr>
                         </tbody>
@@ -130,6 +135,7 @@
                     <tr>
                         <th>Skill</th>
                         <th>Rating</th>
+                        <th colspan="2">Action</th>
                     </tr>
                     </thead>
 
@@ -139,8 +145,11 @@
                             <td><p th:text="${item.skill}"/></td>
                             <td><p th:text="${item.rating}"/></td>
                             <td>
-                                <a th:href="@{|/update/${item.id}/?type=skill|}" class="action-link">Edit</a>
-                                <a th:href="@{|/delete/${item.id}?type=skill|}" class="action-link">Delete</a>
+                                <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
+                                <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
                             </td>
                         </tr>
                         </tbody>
