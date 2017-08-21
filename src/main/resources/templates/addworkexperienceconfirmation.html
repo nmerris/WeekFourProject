@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
@@ -9,29 +8,30 @@
 <!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable and highlight -->
 <nav th:replace="fragments :: navbar(${pageState})"></nav>
 
-<section id="contact">
     <div class="container">
+        
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading" th:text="'Resume for ' + ${firstAndLastName}"></h2>
-                <h6 class="section-heading" th:text="'You have entered ' + ${currentNumRecords} + ' work experience(s) so far'"></h6><br>
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+                <h2 class="" th:text="'Resume for ' + ${firstAndLastName}"></h2>
+                <span class="glyphicon glyphicon-briefcase"></span>
+                <p class="section-heading" th:text="${currentNumRecords} + ' entries'"></p>
 
-                <p class="section-heading" th:text="'Company just entered: ' + ${workExperienceJustAdded.company}"></p>
-                <p class="section-heading" th:text="'Job Title just entered: ' + ${workExperienceJustAdded.jobTitle}"></p>
+                <p class="" th:text="'Company just entered: ' + ${workExperienceJustAdded.company}"></p>
+                <p class="" th:text="'Job Title just entered: ' + ${workExperienceJustAdded.jobTitle}"></p>
 
-                <!--<p class="section-heading" th:text="'Start date just entered: ' + ${workExperienceJustAdded.dateStart}"></p>-->
-                <p class="section-heading" th:text="'Start date just entered: ' + ${#dates.format(workExperienceJustAdded.dateStart, 'MMM dd, yyyy')}"></p>
-                <!--<p class="section-heading" th:text="'End date just entered: ' + ${workExperienceJustAdded.dateEnd}"></p>-->
-                <!--<p class="section-heading" th:text="'End date just entered: ' + ${#dates.format(workExperienceJustAdded.dateEnd, 'MMM dd, yyyy')}"></p>-->
-                <p class="section-heading" th:text="'End date just entered: ' + ${dateEndString}"></p>
+                <!--<p class="" th:text="'Start date just entered: ' + ${workExperienceJustAdded.dateStart}"></p>-->
+                <p class="" th:text="'Start date just entered: ' + ${#dates.format(workExperienceJustAdded.dateStart, 'MMM dd, yyyy')}"></p>
+                <!--<p class="" th:text="'End date just entered: ' + ${workExperienceJustAdded.dateEnd}"></p>-->
+                <!--<p class="" th:text="'End date just entered: ' + ${#dates.format(workExperienceJustAdded.dateEnd, 'MMM dd, yyyy')}"></p>-->
+                <p class="" th:text="'End date just entered: ' + ${dateEndString}"></p>
 
-                <p class="section-heading" th:text="'Duty one just entered: ' + ${workExperienceJustAdded.dutyOne}"></p>
-                <p class="section-heading" th:text="'Duty two just entered: ' + ${workExperienceJustAdded.dutyTwo}"></p><br/>
+                <p class="" th:text="'Duty one just entered: ' + ${workExperienceJustAdded.dutyOne}"></p>
+                <p class="" th:text="'Duty two just entered: ' + ${workExperienceJustAdded.dutyTwo}"></p><br/>
 
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <a class="btn btn-md" href="addworkexperience">Add Another</a>
                 <!--<a class="btn btn-md" href="editdetails#workexperiences">Edit Resume Details</a>-->
                 <!--<a class="btn btn-md" th:href="@{/resumenavigation}">Home</a>-->
@@ -39,7 +39,6 @@
             </div>
         </div>
     </div>
-</section>
 
 <!-- Footer -->
 <footer th:replace="fragments :: footer"></footer>

@@ -22,3 +22,7 @@ body {
     padding-top: 6px;
     padding-bottom: 6px;
 }
+
+.panel-primary {
+    margin-top: 10px;
+}

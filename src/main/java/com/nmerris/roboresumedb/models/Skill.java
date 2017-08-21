@@ -1,5 +1,7 @@
 package com.nmerris.roboresumedb.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +16,9 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Size(min = 3, max = 64)
+    @NotEmpty
     private String skill;
-    @NotNull
+    @NotEmpty
     private String rating;
 
     public String getSkill() {

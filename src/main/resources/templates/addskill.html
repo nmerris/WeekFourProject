@@ -42,7 +42,8 @@
                             <input type="radio" name="rating" id="familiarId" value="Familiar" th:field="*{rating}"/><br/>
 
 
-                            <p class="help-block text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" th:text="'Please enter a rating'"></p>
+                            <p class="help-block text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></p>
+                            <!--<p class="help-block text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" th:text="'Please enter a rating'"></p>-->
 
                         </div>
 

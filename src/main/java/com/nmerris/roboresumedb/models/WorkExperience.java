@@ -1,5 +1,6 @@
 package com.nmerris.roboresumedb.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,10 +17,13 @@ public class WorkExperience {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Size(min = 3, max = 64)
+//    @Size(min = 3, max = 64)
+    @NotEmpty
     private String jobTitle;
 
-    @Size(min = 3, max = 64)
+
+//    @Size(min = 3, max = 64)
+    @NotEmpty
     private String company;
 
     // @Temporal required for validation
@@ -34,7 +38,8 @@ public class WorkExperience {
     @DateTimeFormat(pattern = "MMM d, yyyy")
     private Date dateEnd;
 
-    @Size(min = 3, max = 64)
+//    @Size(min = 3, max = 64)
+    @NotEmpty
     private String dutyOne;
 
     // second duty is optional
