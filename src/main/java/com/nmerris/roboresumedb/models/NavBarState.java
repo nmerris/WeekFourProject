@@ -1,6 +1,6 @@
 package com.nmerris.roboresumedb.models;
 
-public class PageLinkState {
+public class NavBarState {
     
     private boolean highlightPersonNav;
     private boolean highlightEdNav;
@@ -17,7 +17,7 @@ public class PageLinkState {
     private boolean disableShowFinalLink;
     
     
-    public PageLinkState() {
+    public NavBarState() {
 //        highlightPersonNav = false;
 //        highlightEdNav = false;
 //        highlightWorkNav = false;

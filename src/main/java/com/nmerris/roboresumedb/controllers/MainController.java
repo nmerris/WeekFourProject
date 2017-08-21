@@ -67,7 +67,7 @@ public class MainController {
         model.addAttribute("newPerson", new Person());
         model.addAttribute("disableSubmit", personRepo.count() >= 1);
 //        setLinkEnabledBooleans(model);
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightPersonNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -86,7 +86,7 @@ public class MainController {
         model.addAttribute("currentNumRecords", personRepo.count());
         addDbTableCountsToModel(model);
 //        setLinkEnabledBooleans(model);
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
 
 
         if(bindingResult.hasErrors()) {
@@ -126,15 +126,11 @@ public class MainController {
         addDbTableCountsToModel(model);
 //        setLinkEnabledBooleans(model);
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightEdNav(true);
         model.addAttribute("pageState", pageState);
 
         addPersonNameToModel(model);
-
-
-
-
 
         model.addAttribute("newEdAchievement", new EducationAchievement());
 
@@ -149,7 +145,9 @@ public class MainController {
         model.addAttribute("edAchievementJustAdded", educationAchievement);
         addPersonNameToModel(model);
 
-        PageLinkState pageState = getPageLinkState();
+//        model.addAttribute("disableSubmit", educationRepo.count() >= 10);
+
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightEdNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -169,6 +167,11 @@ public class MainController {
 
         // need to get the count AFTER successfully adding to db, so it is up to date
         model.addAttribute("currentNumRecords", educationRepo.count());
+        // also need to set disableSubmit flag AFTER adding to db, or user will think they can add more than 10
+        // because the 'add another' button will work, but then the entry form button will be disabled, this
+        // way the user will not be confused
+        model.addAttribute("disableSubmit", educationRepo.count() >= 10);
+
 
         return "addeducationconfirmation";
     }
@@ -184,7 +187,7 @@ public class MainController {
         addDbTableCountsToModel(model);
 //        setLinkEnabledBooleans(model);
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightWorkNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -205,13 +208,16 @@ public class MainController {
         addDbTableCountsToModel(model);
 //        setLinkEnabledBooleans(model);
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightWorkNav(true);
         model.addAttribute("pageState", pageState);
 
         // add a placeholder for end date that is todays date, because why not?
         model.addAttribute("todaysDate", Utilities.getTodaysDateString());
         model.addAttribute("workExperienceJustAdded", workExperience);
+
+//        model.addAttribute("disableSubmit", workExperienceRepo.count() >= 10);
+
 
         // TODO chop off the timestamp from the date, put it back in the model so it looks nice when page is redisplayed with errors
         // TODO check if end date is later than start date
@@ -232,6 +238,8 @@ public class MainController {
 
         workExperienceRepo.save(workExperience);
         model.addAttribute("currentNumRecords", workExperienceRepo.count());
+        model.addAttribute("disableSubmit", workExperienceRepo.count() >= 10);
+
 
         return "addworkexperienceconfirmation";
     }
@@ -248,7 +256,10 @@ public class MainController {
         addDbTableCountsToModel(model);
 //        setLinkEnabledBooleans(model);
 
-        PageLinkState pageState = getPageLinkState();
+        model.addAttribute("disableSubmit", skillRepo.count() >= 20);
+
+
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightSkillNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -262,11 +273,11 @@ public class MainController {
 
         addPersonNameToModel(model);
         model.addAttribute("skillJustAdded", skill);
-        model.addAttribute("disableSubmit", skillRepo.count() >= 20);
+//        model.addAttribute("disableSubmit", skillRepo.count() >= 20);
         addDbTableCountsToModel(model);
 //        setLinkEnabledBooleans(model);
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightSkillNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -278,6 +289,8 @@ public class MainController {
 
         skillRepo.save(skill);
         model.addAttribute("currentNumRecords", skillRepo.count());
+        model.addAttribute("disableSubmit", skillRepo.count() >= 20);
+
 
         return "addskillconfirmation";
     }
@@ -290,7 +303,7 @@ public class MainController {
         addDbContentsToModel(model);
 //        setLinkEnabledBooleans(model);
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightEditNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -320,7 +333,7 @@ public class MainController {
                 skillRepo.delete(id);
         }
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightEditNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -329,6 +342,7 @@ public class MainController {
 //        setLinkEnabledBooleans(model);
         addDbTableCountsToModel(model);
 
+        // TODO would be nice to return with an anchor tag to the section user was just on, not as simple as it seems
         return "editdetails";
     }
 
@@ -342,7 +356,7 @@ public class MainController {
 //        setLinkEnabledBooleans(model);
         addDbTableCountsToModel(model);
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightEditNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -381,7 +395,7 @@ public class MainController {
     @GetMapping("/finalresume")
     public String finalResumeGet(Model model) {
 
-        PageLinkState pageState = getPageLinkState();
+        NavBarState pageState = getPageLinkState();
         pageState.setHighlightFinalNav(true);
         model.addAttribute("pageState", pageState);
 
@@ -399,14 +413,14 @@ public class MainController {
 
     
 
-    private PageLinkState getPageLinkState() {
+    private NavBarState getPageLinkState() {
         // the navi links are disabled depending on the number of records in the various db tables
         // note: the 'highlighted' nav bar choice is set in each route
-        PageLinkState pageState = new PageLinkState();
+        NavBarState pageState = new NavBarState();
 
         pageState.setDisablePersonLink(personRepo.count() > 0);
 
-        pageState.setDisableAddEdLink(personRepo.count() == 0 || educationRepo.count() > 10);
+        pageState.setDisableAddEdLink(personRepo.count() == 0 || educationRepo.count() >= 10);
 
         pageState.setDisableAddSkillLink(personRepo.count() == 0 || skillRepo.count() >= 20);
 
