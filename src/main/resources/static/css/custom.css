@@ -57,3 +57,8 @@ thead {
     max-width: 150px;
     /*max-height: 50px;*/
 }
+
+.modal-header {
+    background-color: #5bc0de;
+    color: white;
+}
