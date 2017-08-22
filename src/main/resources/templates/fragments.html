@@ -12,6 +12,8 @@
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}"></script>
+
 
     <!-- Custom styles for this template -->
     <!--<link th:href="@{/css/navbar-fixed-top.css}" rel="stylesheet">-->
@@ -53,13 +55,61 @@
                         <a th:href="@{/editdetails}" th:classappend="${navState.disableEditDetailsLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-pencil"></span>Edit Details</a>
                     </li>
                     <li th:classappend="${navState.highlightFinalNav ? 'active' : ''}">
-                        <a th:href="@{/finalresume}" th:classappend="${navState.disableShowFinalLink ? 'disable-click' : ''}"><span class="glyphicon glyphicon-eye-open"></span>View Resume</a>
+                        <a href="#"
+                           th:href="@{/finalresume}"
+                           th:attr="data-toggle='modal'"
+                           data-target="#viewFinalModal"
+                           th:classappend="${navState.disableShowFinalLink ? 'disable-click' : ''}"
+                           ><span class="glyphicon glyphicon-eye-open"></span>View Resume</a>
                     </li>
                 </ul>
 
             </div>
         </div>
+
+
+        <!-- Trigger the modal with a button -->
+        <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#viewFinalModal">Open Small Modal</button>-->
+
+        <!-- Modal -->
+        <!--<div class="modal fade" id="viewFinalModal" role="dialog">-->
+            <!--<div class="modal-dialog modal-sm">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                        <!--<h4 class="modal-title">Modal Header</h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body">-->
+                        <!--<p>This is a small modal.</p>-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="modal fade" id="viewFinalModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>This is a small modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </nav>
+
+
+
 
 
     <footer th:fragment="footerTemplate">
@@ -73,14 +123,11 @@
         </div>
     </footer>
 
-    <!-- TODO remove below and also js folder, make sure it all still works -->
-    <div th:fragment="javaScriptTemplate">
-        <!-- Bootstrap core JavaScript -->
-        <!--<script src="../vendor/jquery/jquery.min.js"></script>-->
-        <!--<script src="../vendor/popper/popper.min.js"></script>-->
-        <!--<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>-->
 
-        <!--<script src="../js/custom.js"></script>-->
+    <!-- Bootstrap core JavaScript and jquery -->
+    <div th:fragment="javaScriptTemplate">
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/bootstrap.js}"></script>
     </div>
 
 </body>
