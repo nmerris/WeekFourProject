@@ -27,6 +27,8 @@
                         </th:block>
                         <br/>
 
+                        <!-- TODO endDate errors out if not present, need to insert Present if no end date -->
+                        <!-- also check what happens if NO work exp entered at all -->
                         <h4>Experience</h4>
                         <th:block th:each="item:${person.workExperiences}">
                             <p class="final-resume-p" th:text="${item.jobTitle}"></p>
