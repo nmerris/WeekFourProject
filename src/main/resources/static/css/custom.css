@@ -38,21 +38,16 @@ input[type="radio"] {
     margin-top: 50px;
 }
 
-
-
 table {
     width:100%;
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
     /*table-layout: fixed;*/
 }
 
-td {
-    padding: 0;
-    margin: 0;
+thead {
+    color: white;
+    background-color: #428bca;
 }
-
-
-
 
 /* can end up with really wide tables if you don't truncate the cells contents */
 .truncate {

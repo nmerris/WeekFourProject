@@ -17,7 +17,7 @@
         <div class="col-sm-8 col-sm-offset-2">
             <section id="person" class="section-heading">
 
-                <table>
+                <table class="table table-hover">
                     <caption><h3><b>Personal Information</b></h3></caption>
                     <thead>
                     <tr>
@@ -30,9 +30,9 @@
                     <th:block th:each="item:${persons}">
                         <tbody>
                         <tr>
-                            <td><p th:text="${item.nameFirst}"/></td>
-                            <td><p th:text="${item.nameLast}"/></td>
-                            <td><p th:text="${item.email}"/></td>
+                            <td><p th:text="${item.nameFirst}"></p></td>
+                            <td><p th:text="${item.nameLast}"></p></td>
+                            <td><p th:text="${item.email}"></p></td>
                             <td>
                                 <a th:href="@{|/update/${item.id}?type=person|}" class="action-link">Edit</a>
                             </td>
@@ -49,7 +49,7 @@
         <div class="col-sm-8 col-sm-offset-2">
             <section id="education">
 
-                <table>
+                <table class="table table-hover">
                     <caption><h3><b>Educational Achievements</b></h3></caption>
                     <thead>
                     <tr>
@@ -62,9 +62,9 @@
                     <th:block th:each="item:${edAchievements}">
                         <tbody>
                         <tr>
-                            <td><p th:text="${item.major}"/></td>
-                            <td><p th:text="${item.school}"/></td>
-                            <td><p th:text="${item.graduationYear}"/></td>
+                            <td><p class="truncate" th:text="${item.major}"></p></td>
+                            <td><p class="truncate" th:text="${item.school}"></p></td>
+                            <td><p th:text="${item.graduationYear}"></p></td>
                             <td>
                                 <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
                                 <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
@@ -85,41 +85,40 @@
         <div class="col-sm-8 col-sm-offset-2">
             <section id="workexperiences">
 
-                <table>
-                <!--<table class="table-hover table-condensed">-->
+                <table class="table table-hover">
                     <caption><h3><b>Work Experiences</b></h3></caption>
-                    <thead>
-                        <tr>
-                            <!-- don't need to show every detail here, fits on screen better without so many columns -->
-                            <th>Job Title</th>
-                            <th>Company</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <!--<th>Duty One</th>-->
-                            <!--<th>Duty Two</th>-->
-                        <th colspan="2">Action</th>
-                    </tr>
-                    </thead>
-                    <th:block th:each="item:${workExperiences}">
-                        <tbody>
-                        <tr>
-                            <td><p class="truncate" th:text="${item.jobTitle}"></p></td>
-                            <td><p class="truncate" th:text="${item.company}"></p></td>
-                            <td><p th:text="${#dates.format(item.dateStart, 'MMM dd, yyyy')}"></p></td>
-                            <td><p th:text="${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy')} : 'Present'"></p></td>
-                            <!--<td><p class="truncate" th:text="${item.dutyOne}"></p></td>-->
-                            <!--<td><p class="truncate" th:text="${item.dutyTwo}"></p></td>-->
-                            <td>
-                                <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
-                                <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
-                            </td>
-                            <td>
-                                <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
-                            </td>
+                        <thead>
+                            <tr>
+                                <!-- don't need to show every detail here, fits on screen better without so many columns -->
+                                <th>Job Title</th>
+                                <th>Company</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <!--<th>Duty One</th>-->
+                                <!--<th>Duty Two</th>-->
+                            <th colspan="2">Action</th>
                         </tr>
-                        </tbody>
-                    </th:block>
-                </table>
+                        </thead>
+                        <th:block th:each="item:${workExperiences}">
+                            <tbody>
+                            <tr>
+                                <td><p class="truncate" th:text="${item.jobTitle}"></p></td>
+                                <td><p class="truncate" th:text="${item.company}"></p></td>
+                                <td><p th:text="${#dates.format(item.dateStart, 'MMM dd, yyyy')}"></p></td>
+                                <td><p th:text="${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy')} : 'Present'"></p></td>
+                                <!--<td><p class="truncate" th:text="${item.dutyOne}"></p></td>-->
+                                <!--<td><p class="truncate" th:text="${item.dutyTwo}"></p></td>-->
+                                <td>
+                                    <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
+                                    <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
+                                </td>
+                                <td>
+                                    <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </th:block>
+                    </table>
 
            </section>
         </div>
@@ -129,7 +128,7 @@
         <div class="col-sm-8 col-sm-offset-2">
             <section id="skills">
 
-                <table>
+                <table class="table table-hover">
                     <caption><h3><b>Skills</b></h3></caption>
                     <thead>
                     <tr>
@@ -142,8 +141,8 @@
                     <th:block th:each="item:${skills}">
                         <tbody>
                         <tr>
-                            <td><p th:text="${item.skill}"/></td>
-                            <td><p th:text="${item.rating}"/></td>
+                            <td><p th:text="${item.skill}"></p></td>
+                            <td><p th:text="${item.rating}"></p></td>
                             <td>
                                 <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
                                 <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
