@@ -79,15 +79,10 @@
     </footer>
 
 
-    <!-- Bootstrap core JavaScript, jquery and.... modal divs -->
-    <div th:fragment="javaScriptTemplate">
+    <!-- boostrap modals - MUST NOT be inside any positioned divs in any page -->
+    <div th:fragment="modals">
 
-        <!-- jquery MUST come before boostrap here or modal won't work -->
-        <script th:src="@{/js/jquery.min.js}"></script>
-        <script th:src="@{/js/bootstrap.js}"></script>
-
-        <!-- all modal divs MUST not be inside any 'positioned' divs in any page layout, or the modal doesn't work -->
-        <!-- so putting it here, which is always included just before the closing body tag, is a safe bet -->
+        <!-- view final resume modal -->
         <div class="modal fade" id="viewFinalModal" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -96,7 +91,7 @@
                         <h4 class="modal-title text-center">Enter at least one educational achievement and one skill</h4>
                     </div>
                     <!--<div class="modal-body">-->
-                        <!--<p>This is a small modal.</p>-->
+                    <!--<p>This is a small modal.</p>-->
                     <!--</div>-->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -104,6 +99,16 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+
+    <!-- Bootstrap core JavaScript, jquery and.... modal divs -->
+    <div th:fragment="javaScriptTemplate">
+
+        <!-- jquery MUST come before boostrap here or modal won't work -->
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/bootstrap.js}"></script>
 
     </div>
 

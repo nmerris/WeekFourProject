@@ -163,7 +163,8 @@
         <div class="col-sm-12 text-center">
             <!-- TODO add warning popup for Delete All! -->
 
-            <a class="btn btn-danger bold-input" href="startover">Delete Everything!</a>
+            <a class="btn btn-danger bold-input" href="startover">
+                <span class="glyphicon glyphicon-warning-sign"></span>Delete Everything!</a>
         </div>
     </div>
 
@@ -180,6 +181,8 @@
 <!-- javascript -->
 <!-- th:block goes away after processing, but what's inside stays, so it won't affect the page layout -->
 <th:block th:replace="fragments :: javaScriptTemplate"></th:block>
+
+<th:block th:replace="fragments :: modals"></th:block>
 
 </body>
 
