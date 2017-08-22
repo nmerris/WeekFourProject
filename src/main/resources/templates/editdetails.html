@@ -110,10 +110,10 @@
                                 <!--<td><p class="truncate" th:text="${item.dutyTwo}"></p></td>-->
                                 <td>
                                     <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
-                                    <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
+                                    <a th:href="@{|/update/${item.id}/?type=workexp|}" class="action-link">Edit</a>
                                 </td>
                                 <td>
-                                    <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
+                                    <a th:href="@{|/delete/${item.id}?type=workexp|}" class="action-link">Delete</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -145,10 +145,10 @@
                             <td><p th:text="${item.rating}"></p></td>
                             <td>
                                 <!-- send both a path variable AND a request param for delete. easy with thymeleaf literal substitution -->
-                                <a th:href="@{|/update/${item.id}/?type=ed|}" class="action-link">Edit</a>
+                                <a th:href="@{|/update/${item.id}/?type=skill|}" class="action-link">Edit</a>
                             </td>
                             <td>
-                                <a th:href="@{|/delete/${item.id}?type=ed|}" class="action-link">Delete</a>
+                                <a th:href="@{|/delete/${item.id}?type=skill|}" class="action-link">Delete</a>
                             </td>
                         </tr>
                         </tbody>
