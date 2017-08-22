@@ -47,20 +47,6 @@ public class MainController {
         return "index";
     }
 
-
-
-//    @GetMapping("/resumenavigation")
-//    public String addResumeGet(Model model) {
-//
-//        addDbTableCountsToModel(model);
-//        addPersonNameToModel(model);
-//        setLinkEnabledBooleans(model);
-//
-//        return "resumenavigation";
-//    }
-
-
-
     @GetMapping("/addperson")
     public String addPersonGet(Model model) {
         model.addAttribute("currentNumRecords", personRepo.count());
@@ -240,12 +226,15 @@ public class MainController {
         }
 
         // show end date as 'Present' if user did not enter end date, otherwise show whatever they entered
-        if(workExperience.getDateEnd() == null) {
-            model.addAttribute("dateEndString", "Present");
-        }
-        else {
-            model.addAttribute("dateEndString", Utilities.getMonthDayYearFromDate(workExperience.getDateEnd()));
-        }
+//        if(workExperience.getDateEnd() == null) {
+//            model.addAttribute("dateEndString", "Present");
+//        }
+//        else {
+//            model.addAttribute("dateEndString", Utilities.getMonthDayYearFromDate(workExperience.getDateEnd()));
+//        }
+
+        model.addAttribute("dateEndString", Utilities.getMonthDayYearFromDate(workExperience.getDateEnd()));
+
 
         workExperienceRepo.save(workExperience);
         NavBarState pageState = getPageLinkState();

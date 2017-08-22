@@ -18,15 +18,22 @@ public class Utilities {
     }
 
 
-
+    // returns 'Present' if date is null, otherwise returns MMM dd, yyyy date string
     public static String getMonthDayYearFromDate(Date date) {
         String dateString = "";
-        SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMM");
-        dateString += (dateFormatMonth.format(date) + " ");
-        SimpleDateFormat dateFormatDay = new SimpleDateFormat("dd");
-        dateString += (dateFormatDay.format(date) + ", ");
-        SimpleDateFormat dateFormatYear = new SimpleDateFormat("yyyy");
-        dateString += (dateFormatYear.format(date));
+
+        if(date == null) {
+            SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMM");
+            dateString += (dateFormatMonth.format(date) + " ");
+            SimpleDateFormat dateFormatDay = new SimpleDateFormat("dd");
+            dateString += (dateFormatDay.format(date) + ", ");
+            SimpleDateFormat dateFormatYear = new SimpleDateFormat("yyyy");
+            dateString += (dateFormatYear.format(date));
+        }
+        else {
+            dateString += "Present";
+        }
+
         return dateString;
     }
     

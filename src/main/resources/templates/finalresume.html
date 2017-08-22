@@ -32,7 +32,14 @@
                         <h4>Experience</h4>
                         <th:block th:each="item:${person.workExperiences}">
                             <p class="final-resume-p" th:text="${item.jobTitle}"></p>
-                            <p class="final-resume-p" th:text="${item.company} + ', ' + ${#dates.format(item.dateStart, 'MMM dd, yyyy')} + ' to ' + ${#dates.format(item.dateEnd, 'MMM dd, yyyy')}"></p>
+
+                            <!-- always have thymeleaf format the start date because it MUST be present and valid -->
+                            <!-- however, end date may be null, in which case we want thymeleaf to insert 'Present' instead -->
+                            <!-- NOTE: app crashes if you feed a null Date to #dates.format(...) -->
+                            <p class="final-resume-p" th:text="${item.company} + ', ' +
+                            ${#dates.format(item.dateStart, 'MMM dd, yyyy')} +
+                             ' to ' + (${item.dateEnd} ? ${#dates.format(item.dateEnd, 'MMM dd, yyyy'} : 'Present')"></p>
+
                             <!--<p class="final-resume-p" th:text="${item.company} +', ' + ${item.dateStart} + ' to ' + ${item.dateEnd}"></p>-->
                             <p class="final-resume-p" th:text="'Duty 1: ' + ${item.dutyOne}"></p>
                             <p class="final-resume-p" th:if="${!#strings.isEmpty(item.dutyTwo)}" th:text="'Duty 2: ' + ${item.dutyTwo}"></p>
